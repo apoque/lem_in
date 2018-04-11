@@ -6,7 +6,7 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/09 18:00:54 by srossi           ###   ########.fr        #
+#    Updated: 2018/04/11 12:12:43 by srossi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ ADDFLAGS =
 DEFRULE = all
 
 # BINARY
-NAME = fdf
+NAME = lemin
 DST =
 
 
@@ -35,10 +35,6 @@ INC_PATH = includes\
 
 # SOURCES
 SRC_NAME = \
-		   fdf.c \
-		   ft_segment.c \
-		   ft_parallel_proj.c \
-		   ft_reset_struct.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
