@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:43:37 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/11 18:32:09 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/11 18:44:39 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ typedef	struct	s_map
 	int		**n_short_paths;
 	int		nb_rooms;
 }				t_map;
+
+int	ft_error(int type_error);
+int	ft_parse(char *line);
 
 #endif
