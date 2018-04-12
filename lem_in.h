@@ -30,7 +30,7 @@ typedef struct				s_room
 				int			y;
 				int			nb_bonds; //nombre de liaisons d une salle
 				int			*bonded_rooms; // liste des salles adjascentes
-				int			occupied //0 si libre sinon numero de la fourmi
+				int			occupied; //0 si libre sinon numero de la fourmi
 				s_room		*next; // pointeur sur la salle nb_room + 1
 }							t_room;
 
