@@ -34,7 +34,7 @@ typedef struct					s_room
 				int				*bonded_rooms; // liste des salles adjascentes
 				int				occupied; //0 si libre sinon numero de la fourmi
 				struct s_room	*next; // pointeur sur la salle nb_room + 1
-}							t_room;
+}								t_room;
 
 typedef struct					s_game
 {
@@ -47,5 +47,6 @@ typedef struct					s_game
 }								t_game;
 
 void							ft_select_path(t_game *game);
+void							ft_display_res(t_game *game);
 
 #endif
