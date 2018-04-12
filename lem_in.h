@@ -13,6 +13,8 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+# include <stdlib.h>
+
 typedef struct				s_ant
 {
 				int			nb; // numero de la fourmi
@@ -38,8 +40,10 @@ typedef struct				s_map
 {
 				t_ant		*ants; // liste des fourmis
 				t_room		**rooms; // debut de la liste chainee des salles
-				int			**ways; // tableau des n chemins les plus cours
+				int			**paths; // tableau des n chemins les plus cours
 				int			nb_rooms; // nombre total de salle
+				int			nb_ants; // nombre total de fourmi
+				int			nb_paths; // nombre de chemins selectionnes
 }							t_map;
 
 #endif
