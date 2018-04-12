@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/11 18:32:12 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/12 18:33:01 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int argc, const char *argv[])
 {
 	int fd;
 	char *line;
-	int i;
+	int i; // nb lignes utiliser structure apres 
 
 	i = 0;
 	if (argc != 2)
@@ -28,7 +28,14 @@ int main(int argc, const char *argv[])
 	{
 		while (get_next_line(fd, &line))
 		{
-			ft_parse(line);
+			if (i == 0)
+			{
+				ft_putstr("nb ants : ");
+				ft_putendl(line);
+			}
+			else
+				ft_parse(line);
+			i++;
 		}
 	}
 	else

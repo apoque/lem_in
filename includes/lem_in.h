@@ -3,51 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 17:43:37 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/11 18:44:39 by srossi           ###   ########.fr       */
+/*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
+/*   Updated: 2018/04/12 18:35:58 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
- #define LEM_IN_H
+# define LEM_IN_H
 
 #include "../libft/libft.h"
-//#include <stdlib.h>
-//#include <unistd.h>
-#include <fcntl.h>
 #include "../gnl/get_next_line.h"
+#include <stdlib.h>
+#include <fcntl.h>
 
-typedef	struct	s_ant
+typedef struct					s_ant
 {
-	int	ant;
-	int	*path;
-	int	nb_iter;
-	int	room;
-	int	iter;
-}				t_ant;
+				int				nb; // numero de la fourmi
+				int				*path; // suite des numeros de salle qu elle va parcourir
+				int				nb_moves; // nombre de coup deja joue
+				int				nb_room; // numero de la salle ou elle se trouve
+				int				wave; // numero de la vague de depart
+}								t_ant;
 
-typedef	struct	s_room
+typedef struct					s_room
 {
-	int		room;
-	int		x;
-	int		y;
-	int		nb_links;
-	int		*next_rooms;
-	int		occupied;
-	s_room	*next;
-}				t_room;
+				char			*name; // nom de la salle
+				int				nb_room; // numero de la salle 
+				int				x; //coordonnees de la salle
+				int				y;
+				int				nb_bonds; //nombre de liaisons d une salle
+				int				*bonded_rooms; // liste des salles adjascentes
+				int				occupied; //0 si libre sinon numero de la fourmi
+				struct s_room	*next; // pointeur sur la salle nb_room + 1
+}							t_room;
 
-typedef	struct	s_map
+typedef struct					s_game
 {
-	s_ant	*tab;
-	s_room	*lst_rooms;
-	int		**n_short_paths;
-	int		nb_rooms;
-}				t_map;
+				t_ant			*ants; // liste des fourmis
+				t_room			**rooms; // debut de la liste chainee des salles
+				int				**paths; // tableau des n chemins les plus cours
+				int				nb_rooms; // nombre total de salle
+				int				nb_ants; // nombre total de fourmi
+				int				nb_paths; // nombre de chemins selectionnes
+}								t_game;
 
-int	ft_error(int type_error);
-int	ft_parse(char *line);
+void							ft_select_path(t_game *game);
+int								ft_parse(char *line);
 
 #endif
