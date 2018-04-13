@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/13 13:32:36 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:08:05 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LEM_IN_H
 
 # include <stdlib.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 
 typedef struct					s_ant
 {
@@ -56,5 +59,6 @@ typedef struct					s_paths
 
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
+int								ft_parse(char *line);
 
 #endif
