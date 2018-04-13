@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/13 13:26:10 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/13 15:44:16 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int ft_is_tube(char *line)
 
 static int ft_isspace(char c)
 {
-	if (c >= 9 && c <= 13)
+	if (c <= 32)
 		return (1);
 	return (0);
 }
