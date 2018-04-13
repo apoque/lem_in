@@ -4,6 +4,9 @@
 start 0 0
 keep 0 6
 calm 0 7
+ 0 7
+  0 7
+calm 0 70
 carry 0 8
 on 0 9
 ##end

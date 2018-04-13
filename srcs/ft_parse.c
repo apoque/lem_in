@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/13 11:06:46 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/13 13:26:10 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,39 @@ int ft_is_tube(char *line)
 	return (0);
 }
 
+static int ft_isspace(char c)
+{
+	if (c >= 9 && c <= 13)
+		return (1);
+	return (0);
+}
+
 int ft_is_room(char *line)
 {
-	//partir de la fin
 	int i;
 	int nb_coord;
+	int nb_char;
 
 	i = ft_strlen(line);
 	nb_coord = 0;
+	nb_char = 0;
 	while (i >= 0)
 	{
+		while (ft_isdigit(line[i]))
+			i--;
+		if (line[i] == ' ' && nb_coord < 2)
+			nb_coord++;
+		else if ((ft_isalpha(line[i]) || ft_isdigit(line[i]) || ft_isspace(line[i])) && nb_coord == 2)
+		{
+			{
+				ft_putchar('#');
+				nb_char++;
+			}
+		}
 		i--;
 	}
-//	if (nb_coord == 2)
-//		return (1);
+	if (nb_coord == 2 && nb_char > 0)
+		return (1);
 	//set_error si error
 	return (0);
 }
