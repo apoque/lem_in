@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/13 13:30:33 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/13 13:32:36 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct					s_paths
 				t_room			*room;// pointeur vers la premiere salle de chaque chemin court
 				s_paths			*next;// pointeur vers chemin le plus court suivant
 }								t_paths;
-	
+
 
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
