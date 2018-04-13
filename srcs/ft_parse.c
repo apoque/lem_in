@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/12 19:36:41 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/13 11:06:46 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ int ft_is_room(char *line)
 
 	i = ft_strlen(line);
 	nb_coord = 0;
-	while (line[i])
+	while (i >= 0)
 	{
+		i--;
 	}
-	if (nb_coord == 2)
-		return (1);
+//	if (nb_coord == 2)
+//		return (1);
 	//set_error si error
 	return (0);
 }
