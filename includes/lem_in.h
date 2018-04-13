@@ -6,17 +6,14 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/12 18:35:58 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/13 13:32:36 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
-#include <stdlib.h>
-#include <fcntl.h>
+# include <stdlib.h>
 
 typedef struct					s_ant
 {
@@ -36,8 +33,9 @@ typedef struct					s_room
 				int				nb_bonds; //nombre de liaisons d une salle
 				int				*bonded_rooms; // liste des salles adjascentes
 				int				occupied; //0 si libre sinon numero de la fourmi
-				struct s_room	*next; // pointeur sur la salle nb_room + 1
-}							t_room;
+				struct s_room	**next_map; // tableau de pointeurs sur les salles next
+				struct s_room	*next_short_path; //pointeur sur next salle du chemin le plus court
+}								t_room;
 
 typedef struct					s_game
 {
@@ -49,7 +47,14 @@ typedef struct					s_game
 				int				nb_paths; // nombre de chemins selectionnes
 }								t_game;
 
+typedef struct					s_paths
+{
+				t_room			*room;// pointeur vers la premiere salle de chaque chemin court
+				s_paths			*next;// pointeur vers chemin le plus court suivant
+}								t_paths;
+
+
 void							ft_select_path(t_game *game);
-int								ft_parse(char *line);
+void							ft_display_res(t_game *game);
 
 #endif
