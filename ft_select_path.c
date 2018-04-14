@@ -32,6 +32,8 @@ void		ft_give_path(t_game *game, int path, int ant, int wave)
 	i = 0;
 	size_path = ft_size_path(game->paths[path]);
 	game->ants[ant].wave = wave;
+	if (size_path == 2)
+		game->ants[ant].wave = 0;
 	game->ants[ant].path = (int *)malloc(sizeof(int) * (size_path + 1));
 	while (game->paths[path][i] != -3)
 	{
@@ -68,6 +70,25 @@ int			ft_check_path(t_game *game, int *path, int ant, int wave)
 		return (0);
 }
 
+int			ft_is_best_path(t_game *game, int path, int ant)
+{
+	int	is_best;
+	int	i;
+
+	is_best = 1;
+	i = 0;
+	while (i < path && is_best == 1)
+	{
+		if (ft_size_path(game->paths[path]) - ft_size_path(game->paths[i]) > game->nb_ants - ant)
+			is_best = 0;
+		i++;
+	}
+	if (is_best == 1)
+		return (1);
+	else
+		return (0);
+}
+
 void		ft_select_path(t_game *game)
 {
 	int	wave;
@@ -81,7 +102,7 @@ void		ft_select_path(t_game *game)
 		path = 0;
 		while (path < game->nb_paths && ant < game->nb_ants)
 		{
-			if (ft_check_path(game, game->paths[path], ant, wave) == 1)
+			if (ft_check_path(game, game->paths[path], ant, wave) == 1 && ft_is_best_path(game, path, ant) == 1)
 			{
 				ft_give_path(game, path, ant, wave);
 				ant++;

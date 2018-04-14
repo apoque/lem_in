@@ -33,6 +33,7 @@ typedef struct					s_room
 				int				nb_bonds; //nombre de liaisons d une salle
 				int				*bonded_rooms; // liste des salles adjascentes
 				int				occupied; //0 si libre sinon numero de la fourmi
+				struct s_room	*next; // pointeur vers la salle suivante de l affichage
 				struct s_room	**next_map; // tableau de pointeurs sur les salles next
 				struct s_room	*next_short_path; //pointeur sur next salle du chemin le plus court
 }								t_room;
@@ -50,11 +51,11 @@ typedef struct					s_game
 typedef struct					s_paths
 {
 				t_room			*room;// pointeur vers la premiere salle de chaque chemin court
-				s_paths			*next;// pointeur vers chemin le plus court suivant
+				struct s_paths	*next;// pointeur vers chemin le plus court suivant
 }								t_paths;
 
 
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
-
+int								ft_size_path(int *path);
 #endif
