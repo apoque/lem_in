@@ -6,8 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/16 12:40:09 by srossi           ###   ########.fr       */
-/*   Updated: 2018/04/16 12:37:30 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/16 12:46:12 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +14,6 @@
 # define LEM_IN_H
 
 # include <stdlib.h>
-
 
 typedef struct					s_ant
 {
