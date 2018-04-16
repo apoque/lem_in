@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/16 12:17:26 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/16 12:20:34 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define LEM_IN_H
 
 # include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
 
 typedef struct					s_ant
 {
@@ -37,6 +34,7 @@ typedef struct					s_room
 				int				*bonded_rooms; // liste des salles adjascentes
 				int				occupied; //0 si libre sinon numero de la fourmi
 				char			visited; //1 :si salle visitee dans algo  du chemin plus court sinon 0
+				int				nb_steps; //nb de coups min depuis la salle start
 				struct s_room	**next_map; // tableau de pointeurs sur les salles next
 				struct s_room	*next_short_path; //pointeur sur next salle du chemin le plus court
 }								t_room;
@@ -61,6 +59,5 @@ typedef struct					s_paths
 
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
-int								ft_parse(char *line);
 
 #endif
