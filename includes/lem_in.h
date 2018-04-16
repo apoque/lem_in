@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/16 12:37:30 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/16 12:41:34 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
-
 
 typedef struct					s_ant
 {
