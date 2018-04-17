@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/03/06 17:01:37 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/17 09:54:17 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			ft_check_path(t_game *game, int *path, int ant, int wave)
 		{
 			if (path[k]  == game->ants[i].path[k + wave - game->ants[i].wave] && path[k] != -1 && path[k] != -2)
 			{
-								trafic = 1;
+				trafic = 1;
 			}
 			k++;
 		}
