@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/17 18:29:01 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:11:35 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,109 +132,63 @@ static int	ft_load_room(t_room *room, char *line, int room_id)
 	}
 	room->name = ft_strnew(i + 1);
 	ft_strncpy(room->name, line,i + 1);
+//	ft_putendl(room->name);
 	return (0);
 }
 
 static int ft_display_lst(t_room *alst)
 {
+	ft_putchar('%');
+	ft_putendl(alst->name);
+	printf("%p\n", alst->next_room_list);
 	if (alst == NULL)
-		return (0);
-	while (alst != NULL)
 	{
+		ft_putchar('%');
+		return (0);
+	}
+	while (alst->next_room_list != NULL)
+	{
+		ft_putchar('+');
 		ft_putendl((*alst).name);
+		ft_putchar('+');
 		alst = alst->next_room_list;
 	}
 	return (0);
 }
-
-static int	ft_add_room(t_game *game, t_room *new_room)
+static int	ft_add_room(t_room **alst, t_room *new_room)
 {
-	new_room->next_room_list = game->room_start;
-	game->room_start = new_room;
+	new_room->next_room_list = *alst;
+	*alst = new_room;
+	printf("%p.", *alst);
+	printf("%p\n", new_room->next_room_list);
+	ft_putchar('.');
+	ft_putendl((*alst)->name);
+	ft_display_lst(*alst);
+	ft_putchar('#');
 	return (0);
 }
 
-static int	ft_create_room(t_game *game, char *line)
+static int	ft_create_room(t_room **a_lst_room, int room_id, char *line)
 {
 	t_room *room;
 
 	room = (t_room *)malloc(sizeof(t_room));
 	ft_bzero(room, sizeof(t_room));
-	game->nb_rooms++;
-	ft_load_room(room, line, game->nb_rooms);
-	ft_add_room(game, room);
-	return (0);
-}
-
-static int	ft_add_link(t_game *game, t_link *new_link)
-{
-	new_link->next = game->room_start->next_map;
-	game->room_start->next_map = new_link;
-	return (0);
-}
-static int	ft_add_bounds(t_game *game, char *room1, char *room2)
-{
-	t_link *link1;
-	t_link *link2;
-	t_room *ptr;
-	ptr = game->room_start;
-	int i;
-
-	i = 0;
-	link1 = (t_link *)malloc(sizeof(t_link));
-	link2 = (t_link *)malloc(sizeof(t_link));
-	while (i < 2)
-	{
-		ft_putnbr(i);
-		while(ft_strcmp(ptr->name, room1) != 0 && ft_strcmp(ptr->name, room2) != 0)
-			ptr = ptr->next_room_list;
-		if (ft_strcmp(ptr->name, room1) == 0)
-		{
-			ft_putstr(room1);
-			ft_putchar('-');
-			ft_putstr(ptr->name);
-			ft_putendl(" found !");
-			ft_add_link(game, link2);
-			ft_putnbr(game->room_start->nb_bounds);
-			ptr->nb_bounds++;
-			ft_putchar('-');
-			ft_putnbr(ptr->nb_bounds);
-			ft_putchar('\n');
-			ptr = ptr->next_room_list;
-		}
-		else if (ft_strcmp(ptr->name, room2) == 0)
-		{
-			ft_putstr(room2);
-			ft_putchar('-');
-			ft_putstr(ptr->name);
-			ft_putendl(" found !");
-			ft_add_link(game, link1);
-			ft_putnbr(ptr->nb_bounds);
-			ptr->nb_bounds++;
-			ft_putchar('-');
-			ft_putnbr(ptr->nb_bounds);
-			ft_putchar('\n');
-			ptr = ptr->next_room_list;
-		}
-		i++;
-	}
-	return (0);
-}
-
-static int	ft_create_bounds(t_game *game, char *line)
-{
-	char *room1;
-	char *room2;
-	char **tab_split;
-
-	tab_split = ft_strsplit(line, '-');
-	room1 = tab_split[0];
-	room2 = tab_split[1];
-	ft_putstr("room 1 : ");
-	ft_putendl(room1);
-	ft_putstr("room 2 : ");
-	ft_putendl(room2);
-	ft_add_bounds(game, room1, room2);
+	ft_load_room(room, line, room_id);
+/*	ft_putstr("room name : ");
+	ft_putendl(room->name);
+	ft_putstr("room id : ");
+	ft_putnbr(room->nb_room);
+	ft_putchar('\n');
+	ft_putstr("X vaut : ");
+	ft_putnbr(room->x);
+	ft_putchar('\n');
+	ft_putstr("Y vaut : ");
+	ft_putnbr(room->y);
+	ft_putchar('\n');*/
+	ft_add_room(a_lst_room, room);
+	ft_putchar('*');
+	ft_putendl((*a_lst_room)->name);
 	return (0);
 }
 
@@ -244,8 +198,8 @@ int	ft_parse(char *line, t_game *game)
 	//	t_ant *l_ants;
 	//	l_ants = NULL;
 	//	ft_bzero(&l_ants, sizeof(l_ants));
-//	t_room	*a_lst_room;
-//	a_lst_room = NULL;
+	t_room	*a_lst_room;
+	a_lst_room = NULL;
 	//verifier a chqaue test si error > 0 si oui stop partsing et traite donnees
 	if (ft_is_com(line))
 		ft_putstr("Comm : ");
@@ -259,13 +213,13 @@ int	ft_parse(char *line, t_game *game)
 		//creer room + assigner le nom et les coordonnees
 		game->nb_rooms++;
 		ft_putstr("Room: ");
-		ft_create_room(game, line);
+		ft_create_room(&a_lst_room, game->nb_rooms, line);
+		ft_putstr(" - ");
+		ft_putendl(a_lst_room->name);
+		ft_display_lst(a_lst_room);
 	}
 	else if (ft_is_tube(line))
-	{
-		ft_create_bounds(game, line);
 		ft_putstr("Tube: ");
-	}
 	else
 	{
 		ft_putendl("FORMAT ERROR");
