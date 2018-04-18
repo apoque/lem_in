@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/17 18:29:01 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/18 17:17:54 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,53 +88,6 @@ int ft_is_room(char *line)
 	return (0);
 }
 
-/*
-   static int ft_load_test_map(t_game *game)
-   {
-   t_ant *l_ants;
-   t_room *room_start;
-   l_ants = NULL;
-   room_start = NULL;
-   ft_bzero(&l_ants, sizeof(l_ants));
-   ft_bzero(&room_start, sizeof(room_start));
-
-   game->nb_rooms = 8;
-   game->nb_ants = 10;
-
-   game->ants = l_ants;
-   game->room_start = l_room_start;
-
-   return (0);
-   }
-   */
-
-static int	ft_load_room(t_room *room, char *line, int room_id)
-{
-	int i;
-	int nb_coord;
-
-	i = ft_strlen(line) - 1;
-	room->nb_room = room_id;
-	nb_coord = 0;
-	while (nb_coord < 2)
-	{
-		while (ft_isdigit(line[i]))
-			i--;
-		if (line[i] == ' ' && nb_coord < 2)
-		{
-			if (nb_coord == 0)
-				room->y = ft_atoi(&line[i]);
-			else
-				room->x = ft_atoi(&line[i]);
-			nb_coord++;
-		}
-		i--;
-	}
-	room->name = ft_strnew(i + 1);
-	ft_strncpy(room->name, line,i + 1);
-	return (0);
-}
-
 static int ft_display_lst(t_room *alst)
 {
 	if (alst == NULL)
@@ -146,98 +99,6 @@ static int ft_display_lst(t_room *alst)
 	}
 	return (0);
 }
-
-static int	ft_add_room(t_game *game, t_room *new_room)
-{
-	new_room->next_room_list = game->room_start;
-	game->room_start = new_room;
-	return (0);
-}
-
-static int	ft_create_room(t_game *game, char *line)
-{
-	t_room *room;
-
-	room = (t_room *)malloc(sizeof(t_room));
-	ft_bzero(room, sizeof(t_room));
-	game->nb_rooms++;
-	ft_load_room(room, line, game->nb_rooms);
-	ft_add_room(game, room);
-	return (0);
-}
-
-static int	ft_add_link(t_game *game, t_link *new_link)
-{
-	new_link->next = game->room_start->next_map;
-	game->room_start->next_map = new_link;
-	return (0);
-}
-static int	ft_add_bounds(t_game *game, char *room1, char *room2)
-{
-	t_link *link1;
-	t_link *link2;
-	t_room *ptr;
-	ptr = game->room_start;
-	int i;
-
-	i = 0;
-	link1 = (t_link *)malloc(sizeof(t_link));
-	link2 = (t_link *)malloc(sizeof(t_link));
-	while (i < 2)
-	{
-		ft_putnbr(i);
-		while(ft_strcmp(ptr->name, room1) != 0 && ft_strcmp(ptr->name, room2) != 0)
-			ptr = ptr->next_room_list;
-		if (ft_strcmp(ptr->name, room1) == 0)
-		{
-			ft_putstr(room1);
-			ft_putchar('-');
-			ft_putstr(ptr->name);
-			ft_putendl(" found !");
-			ft_add_link(game, link2);
-			ft_putnbr(game->room_start->nb_bounds);
-			ptr->nb_bounds++;
-			ft_putchar('-');
-			ft_putnbr(ptr->nb_bounds);
-			ft_putchar('\n');
-			ptr = ptr->next_room_list;
-		}
-		else if (ft_strcmp(ptr->name, room2) == 0)
-		{
-			ft_putstr(room2);
-			ft_putchar('-');
-			ft_putstr(ptr->name);
-			ft_putendl(" found !");
-			ft_add_link(game, link1);
-			ft_putnbr(ptr->nb_bounds);
-			ptr->nb_bounds++;
-			ft_putchar('-');
-			ft_putnbr(ptr->nb_bounds);
-			ft_putchar('\n');
-			ptr = ptr->next_room_list;
-		}
-		i++;
-	}
-	return (0);
-}
-
-static int	ft_create_bounds(t_game *game, char *line)
-{
-	char *room1;
-	char *room2;
-	char **tab_split;
-
-	tab_split = ft_strsplit(line, '-');
-	room1 = tab_split[0];
-	room2 = tab_split[1];
-	ft_putstr("room 1 : ");
-	ft_putendl(room1);
-	ft_putstr("room 2 : ");
-	ft_putendl(room2);
-	ft_add_bounds(game, room1, room2);
-	return (0);
-}
-
 
 int	ft_parse(char *line, t_game *game)
 {

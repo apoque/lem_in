@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/17 18:03:08 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/18 17:01:10 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ typedef struct					s_paths
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
 int								ft_parse(char *line, t_game *game);
+int								ft_create_bounds(t_game *game, char *line);
+int								ft_create_room(t_game *game, char *line);
 
 #endif
