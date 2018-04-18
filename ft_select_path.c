@@ -40,6 +40,7 @@ void		ft_give_path(t_game *game, int path, int ant, int wave)
 		game->ants[ant].path[i] = game->paths[path][i];
 		i++;
 	}
+	//printf("fourmi n*%i wave = %i\n", ant, game->ants[ant].wave);
 	game->ants[ant].path[i] = -3;
 }
 
@@ -54,16 +55,17 @@ int			ft_check_path(t_game *game, int *path, int ant, int wave)
 	while (i < ant && trafic == 0)
 	{
 		k = 0;
-		while ((path[k] != -2 && game->ants[i].path[k + wave - game->ants[i].wave] != -2))
+		while (trafic == 0 && (k + wave - game->ants[i].wave) < ft_size_path(game->ants[i].path) && (path[k] != -2 && game->ants[i].path[k + wave - game->ants[i].wave] != -2))
 		{
 			if (path[k]  == game->ants[i].path[k + wave - game->ants[i].wave] && path[k] != -1 && path[k] != -2)
 			{
-								trafic = 1;
+				trafic = 1;
 			}
 			k++;
 		}
 		i++;
 	}
+	//printf("size_path = %i wave = %i & trafic = %i\n", ft_size_path(path), wave, trafic);
 	if (trafic == 0)
 		return (1);
 	else
@@ -79,7 +81,7 @@ int			ft_is_best_path(t_game *game, int path, int ant)
 	i = 0;
 	while (i < path && is_best == 1)
 	{
-		if (ft_size_path(game->paths[path]) - ft_size_path(game->paths[i]) > game->nb_ants - ant)
+		if (ft_size_path(game->paths[path]) - ft_size_path(game->paths[i]) >= game->nb_ants - ant)
 			is_best = 0;
 		i++;
 	}
