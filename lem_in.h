@@ -54,8 +54,21 @@ typedef struct					s_paths
 				struct s_paths	*next;// pointeur vers chemin le plus court suivant
 }								t_paths;
 
+typedef struct					s_ways
+{
+				int				*way;
+				struct s_ways	*next;
+}								t_ways;
+
+typedef struct					s_sets
+{
+				int				**set;
+				char			****names;
+				int				cost;
+}								t_sets;
 
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
 int								ft_size_path(int *path);
+void							ft_compatibilities(t_game *game, t_ways **start, int n);
 #endif

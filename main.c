@@ -164,7 +164,6 @@ int		main(void)
 	way_start = &way1;
 
 	way5 = (t_ways *)malloc(sizeof(t_ways));
-	way5->nb = 5;
 	way5->way = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
 	while (i <= game.nb_rooms)
 	{
@@ -180,7 +179,6 @@ int		main(void)
 	way5->next = NULL;
 
 	way4 = (t_ways *)malloc(sizeof(t_ways));
-	way4->nb = 4;
 	way4->way = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
 	while (i <= game.nb_rooms)
 	{
@@ -195,7 +193,6 @@ int		main(void)
 	way4->next = way5;
 
 	way3 = (t_ways *)malloc(sizeof(t_ways));
-	way3->nb = 3;
 	way3->way = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
 	while (i <= game.nb_rooms)
 	{
@@ -210,7 +207,6 @@ int		main(void)
 	way3->next = way4;
 
 	way2 = (t_ways *)malloc(sizeof(t_ways));
-	way2->nb = 2;
 	way2->way = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
 	while (i <= game.nb_rooms)
 	{
@@ -225,7 +221,6 @@ int		main(void)
 	way2->next = way3;
 
 	way1 = (t_ways *)malloc(sizeof(t_ways));
-	way1->nb = 1;
 	way1->way = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
 	while (i <= game.nb_rooms)
 	{
@@ -241,8 +236,8 @@ int		main(void)
 	way1->next = way2;
 
 
-	ft_compatibilities(&game, way_start, 3);
-	printf("\n\n\n");
+	//ft_compatibilities(&game, way_start, 3);
+	//printf("\n\n\n");
 	ft_compatibilities(&game, way_start, 2);
 
 	//ft_select_path(&game);

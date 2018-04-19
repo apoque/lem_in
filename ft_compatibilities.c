@@ -104,13 +104,13 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n)
 	way = *start;
 	(void)game;
 	set = (int **)malloc(sizeof(int *) * n);
-	while (way != NULL)
-	{
+	//while (way != NULL)
+	//{
 		i = 0;
 		set[i] = way->way;
 		way_bis = way->next;
 		i++;
 		ft_recursive(&set, &i, &way_bis, &n);
-		way = way->next;
-	}
+		//way = way->next;
+	//}
 }
