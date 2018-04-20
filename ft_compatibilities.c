@@ -65,7 +65,7 @@ int			ft_are_compatible(int **set, int n)
 	return ((i[4] == 0) ? 1 : 0 );
 }
 
-void		ft_recursive(int ***sett, int *ii, t_ways **way_bi, int *nn)
+void		ft_recursive(t_game *game, int ***sett, int *ii, t_ways **way_bi, int *nn)
 {
 	t_ways	*way_bis;
 	int		i;
@@ -84,9 +84,12 @@ void		ft_recursive(int ***sett, int *ii, t_ways **way_bi, int *nn)
 		if (ft_are_compatible(set, i + 1) == 1)
 		{
 			if (++i == n)
+			{
 				ft_print_set(set, n);
+				ft_give_path_cost(game, set, game->n, game->nb_ants);
+			}
 			else
-				ft_recursive(&set, &i, &(way_bis->next), &n);
+				ft_recursive(game, &set, &i, &(way_bis->next), &n);
 		}
 		if (k != i)
 			i--;
@@ -94,7 +97,7 @@ void		ft_recursive(int ***sett, int *ii, t_ways **way_bi, int *nn)
 	}
 }
 
-void		ft_compatibilities(t_game *game, t_ways **start, int n)
+void		ft_compatibilities(t_game *game, t_ways **start, int n) //ft a appeler a chaque fois qu on trouve un nouveau chemin
 {
 	t_ways	*way;
 	t_ways	*way_bis;
@@ -102,7 +105,6 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n)
 	int		i;
 
 	way = *start;
-	(void)game;
 	set = (int **)malloc(sizeof(int *) * n);
 	//while (way != NULL)
 	//{
@@ -110,7 +112,14 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n)
 		set[i] = way->way;
 		way_bis = way->next;
 		i++;
-		ft_recursive(&set, &i, &way_bis, &n);
+		while (n > 1 && game->set.found == 0)
+		{
+			ft_recursive(game, &set, &i, &way_bis, &n);
+			n--;
+		}
+		ft_print_set(set, n);
+		if (game->set.found == 0)
+			ft_give_path_cost(game, set, n, game->nb_ants);
 		//way = way->next;
 	//}
 }

@@ -81,19 +81,20 @@ int		main(void)
 
 
 	game.nb_paths = 3;
-	game.nb_ants = 14;
+	game.nb_ants = 20;
 	game.nb_rooms = 10;
 	game.paths = (int **)malloc(sizeof(int *) * 3);
-	game.paths[0] = (int *)malloc(sizeof(int) * 4);
+	game.paths[0] = (int *)malloc(sizeof(int) * 5);
 	game.paths[0][0] = -1;
-	game.paths[0][1] = 0;
-	game.paths[0][2] = -2;
-	game.paths[0][3] = -3;
+	game.paths[0][1] = 2;
+	game.paths[0][2] = 4;
+	game.paths[0][3] = -2;
+	game.paths[0][4] = -3;
 	game.paths[1] = (int *)malloc(sizeof(int) * 6);
 	game.paths[1][0] = -1;
 	game.paths[1][1] = 1;
-	game.paths[1][2] = 2;
-	game.paths[1][3] = 3;
+	game.paths[1][2] = 3;
+	game.paths[1][3] = 7;
 	game.paths[1][4] = -2;
 	game.paths[1][5] = -3;
 	game.paths[2] = (int *)malloc(sizeof(int) * 7);
@@ -172,8 +173,8 @@ int		main(void)
 	}
 	i = 0;
 	way5->way[0] = -1;
-	way5->way[1] = 3;
-	way5->way[2] = 11;
+	way5->way[1] = 1;
+	way5->way[2] = 8;
 	way5->way[3] = 0;
 	way5->way[4] = -2;
 	way5->next = NULL;
@@ -203,7 +204,8 @@ int		main(void)
 	way3->way[0] = -1;
 	way3->way[1] = 5;
 	way3->way[2] = 2;
-	way3->way[3] = -2;
+	way3->way[3] = 0;
+	way3->way[4] = -2;
 	way3->next = way4;
 
 	way2 = (t_ways *)malloc(sizeof(t_ways));
@@ -215,7 +217,7 @@ int		main(void)
 	}
 	i = 0;
 	way2->way[0] = -1;
-	way2->way[1] = 2;
+	way2->way[1] = 0;
 	way2->way[2] = 9;
 	way2->way[3] = -2;
 	way2->next = way3;
@@ -231,15 +233,40 @@ int		main(void)
 	way1->way[0] = -1;
 	way1->way[1] = 1;
 	way1->way[2] = 3;
-	way1->way[3] = 8;
+	way1->way[3] = 0;
 	way1->way[4] = -2;
 	way1->next = way2;
 
 
+	t_set	set;
+	int		k;
+	int		m;
+
+	k = 0;
+	game.n = 3;
+	set.set = (int **)malloc(sizeof(int *) * game.n);
+	while (k < game.n)
+	{
+		m = 0;
+		set.set[k] = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
+		while (m <= game.nb_rooms)
+		{
+			set.set[k][m] = -3;
+			m++;
+		}
+		k++;
+	}
+	set.nb_path = 0;
+	set.cost = 0;
+
+	game.set = set;
+	game.set.found = 0;
+
 	//ft_compatibilities(&game, way_start, 3);
 	//printf("\n\n\n");
-	ft_compatibilities(&game, way_start, 2);
+	ft_compatibilities(&game, way_start, game.n);
 
-	//ft_select_path(&game);
-	//ft_display_res(&game);
+	printf("\n\n\n");
+	ft_select_path(&game);
+	ft_display_res(&game);
 }

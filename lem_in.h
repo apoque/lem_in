@@ -38,14 +38,24 @@ typedef struct					s_room
 				struct s_room	*next_short_path; //pointeur sur next salle du chemin le plus court
 }								t_room;
 
+typedef struct					s_set
+{
+				int				**set;
+				int				nb_path;
+				int				cost;
+				short			found;
+}								t_set;
+
 typedef struct					s_game
 {
 				t_ant			*ants; // liste des fourmis
 				t_room			**rooms; // debut de la liste chainee des salles
+				t_set			set;
 				int				**paths; // tableau des n chemins les plus cours
 				int				nb_rooms; // nombre total de salle
 				int				nb_ants; // nombre total de fourmi
 				int				nb_paths; // nombre de chemins selectionnes
+				int				n;       //minimum entre nb_ants liaisons de start et end
 }								t_game;
 
 typedef struct					s_paths
@@ -71,4 +81,5 @@ void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
 int								ft_size_path(int *path);
 void							ft_compatibilities(t_game *game, t_ways **start, int n);
+void							ft_give_path_cost(t_game *game, int **set, int n, int ants);
 #endif
