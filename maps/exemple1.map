@@ -2,15 +2,20 @@
 #vertices
 ##start
 start 0 10
-keep 0 6
+keep 5 8
 calm 0 7
+##end
+test_coord 5 8
 carry 0 8
 on 0 9
 ##end
-end 0 10
+end 0 12
 #edges
 start-keep
+start-keep
 keep-calm
+room_test_error  18 7
+calm-keep
 carry-calm
 keep-end
 carry-end

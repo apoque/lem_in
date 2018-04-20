@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/18 17:01:10 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/20 16:05:03 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct					s_game
 				t_room			*room_start; // debut de la liste chainee des salles
 				t_room			*room_end; // fin de la liste chainee des salles
 				int				**paths; // tableau des n chemins les plus cours
+				int				f_start;
+				int				f_end;
+				int				f_section;
 				int				nb_rooms; // nombre total de salle
 				int				nb_ants; // nombre total de fourmi
 				int				nb_paths; // nombre de chemins selectionnes

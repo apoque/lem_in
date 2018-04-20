@@ -6,20 +6,12 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/18 17:17:54 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/20 17:27:18 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 #include <stdio.h>
-
-int	ft_is_com(char *line)
-{
-	if (line[0] == '#' && line[1] != '#')
-		return (1);
-	//set_error si error
-	return (0);
-}
 
 int ft_is_start(char *line)
 {
@@ -32,6 +24,14 @@ int ft_is_start(char *line)
 int ft_is_end(char *line)
 {
 	if (line[0] == '#' && line[1] == '#' && ft_strcmp(&line[2], "end") == 0)
+		return (1);
+	//set_error si error
+	return (0);
+}
+
+int	ft_is_com(char *line)
+{
+	if (line[0] == '#' && !ft_is_start(line) && !ft_is_end(line)) //line[1] != '#')
 		return (1);
 	//set_error si error
 	return (0);
@@ -102,27 +102,43 @@ static int ft_display_lst(t_room *alst)
 
 int	ft_parse(char *line, t_game *game)
 {
-	//	t_ant *l_ants;
-	//	l_ants = NULL;
-	//	ft_bzero(&l_ants, sizeof(l_ants));
-//	t_room	*a_lst_room;
-//	a_lst_room = NULL;
-	//verifier a chqaue test si error > 0 si oui stop partsing et traite donnees
+	if (game->f_section < 1)
+		return (-1);
+
 	if (ft_is_com(line))
 		ft_putstr("Comm : ");
 	else if (ft_is_start(line))
-		ft_putstr("Start: ");
-	else if (ft_is_end(line))
-		ft_putstr("End  : ");
-	else if (ft_is_room(line))
 	{
-		//si room n'existe pas deja :
-		//creer room + assigner le nom et les coordonnees
+		if (game->f_start > 0 && game->f_section == 1)
+		{
+			ft_putendl("Deux salles 'start' !");
+			return (-1);
+		}
+		game->f_start++;
+		game->room_start->nb_room = -1;
+		ft_putstr("Start: ");
+	}
+	else if (ft_is_end(line))
+	{
+		if (game->f_end > 0)
+		{
+			ft_putendl("Deux salles 'end' !");
+			return (-1);
+		}
+		game->f_end++;
+		game->room_start->nb_room = -2;
+		ft_putstr("End  : ");
+		game->f_section = 2;
+	}
+	else if (ft_is_room(line) && (game->f_section == 1 || game->f_section == 2))
+	{
+		if (game->f_start == 2)
+			game->f_section = 3;
 		game->nb_rooms++;
 		ft_putstr("Room: ");
 		ft_create_room(game, line);
 	}
-	else if (ft_is_tube(line))
+	else if (ft_is_tube(line) && game->f_section == 3)
 	{
 		ft_create_bounds(game, line);
 		ft_putstr("Tube: ");

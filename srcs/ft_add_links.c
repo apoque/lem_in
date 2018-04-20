@@ -6,21 +6,23 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:56:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/19 17:12:53 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/20 15:39:48 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 static	int	ft_find_link(t_link *link, char *name)
 {
 	while (link && (ft_strcmp(link->room->name, name) != 0))
 		link = link->next;
-	if (ft_strcmp(link->room->name, name) == 0)
+	if (link && ft_strcmp(link->room->name, name) == 0)
 	{
 		ft_putendl("lien deja existant");
 		return (1);
 	}
+	ft_putstr("OK\n");
 	return (0);
 }
 
@@ -29,8 +31,8 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 	t_room *ptr_cpy;
 
 	ptr_cpy = ptr;
-//	if (ft_find_link(ptr_cpy->next_map, room1))
-//		return (0);
+	if (ft_find_link(ptr_cpy->next_map, room1))
+		return (1);
 
 	ft_putstr("1ere salle : ");
 	ft_putendl(ptr_cpy->name);
@@ -41,6 +43,7 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 	
 	while(ft_strcmp(ptr_cpy->name, room1) != 0)
 		ptr_cpy = ptr_cpy->next_room_list;
+
 	
 	ft_putstr("2eme salle : ");
 	ft_putendl(ptr_cpy->name);
@@ -113,6 +116,12 @@ int	ft_create_bounds(t_game *game, char *line)
 	ft_putendl(room1);
 	ft_putstr("room 2 : ");
 	ft_putendl(room2);
-	ft_add_bounds(game, room1, room2, link1, link2);
+	if (ft_add_bounds(game, room1, room2, link1, link2) == 1)
+	{
+		ft_memdel((void *)link1);
+		ft_memdel((void *)link2);
+	}
+	ft_strdel(&room1);
+	ft_strdel(&room2);
 	return (0);
 }
