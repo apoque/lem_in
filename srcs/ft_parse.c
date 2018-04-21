@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/20 17:27:18 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/21 18:13:08 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	ft_parse(char *line, t_game *game)
 {
 	if (game->f_section < 1)
 		return (-1);
-
 	if (ft_is_com(line))
 		ft_putstr("Comm : ");
 	else if (ft_is_start(line))
@@ -115,7 +114,7 @@ int	ft_parse(char *line, t_game *game)
 			return (-1);
 		}
 		game->f_start++;
-		game->room_start->nb_room = -1;
+	//	game->room_start->nb_room = -1;
 		ft_putstr("Start: ");
 	}
 	else if (ft_is_end(line))
@@ -126,13 +125,18 @@ int	ft_parse(char *line, t_game *game)
 			return (-1);
 		}
 		game->f_end++;
-		game->room_start->nb_room = -2;
+	//	game->room_start->nb_room = -2;
 		ft_putstr("End  : ");
 		game->f_section = 2;
 	}
 	else if (ft_is_room(line) && (game->f_section == 1 || game->f_section == 2))
 	{
-		if (game->f_start == 2)
+		if (game->f_end == 1 && game->f_section == 3)
+		{
+			ft_putendl("salle end deja trouvee, plus de room acceptee");
+			return (-1);
+		}
+		if (game->f_section == 2)
 			game->f_section = 3;
 		game->nb_rooms++;
 		ft_putstr("Room: ");
