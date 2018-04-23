@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:57:20 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/20 15:03:52 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/23 11:57:06 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	int	ft_find_room(t_room *lst_room, t_room *new_room)
 {
 	ft_putstr("\n");
 	while (lst_room && !(ft_strcmp(lst_room->name, new_room->name) == 0) && !(lst_room->x == new_room->x && lst_room->y == new_room->y))
-		lst_room = lst_room->next_room_list;
+		lst_room = lst_room->next;
 	if (lst_room && ft_strcmp(lst_room->name, new_room->name) == 0)
 	{
 		ft_putendl("room deja existante (name)");
@@ -60,10 +60,10 @@ static int	ft_load_room(t_room *room, char *line, int room_id)
 
 static int	ft_add_room(t_game *game, t_room *new_room)
 {
-	if (ft_find_room(game->room_start, new_room) == 1)
+	if (ft_find_room(game->rooms, new_room) == 1)
 		return (1);
-	new_room->next_room_list = game->room_start;
-	game->room_start = new_room;
+	new_room->next = game->rooms;
+	game->rooms = new_room;
 	return (0);
 }
 

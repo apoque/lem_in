@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:56:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/20 15:39:48 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/23 11:56:38 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 	ft_putendl("Lien 1 cree.");
 	
 	while(ft_strcmp(ptr_cpy->name, room1) != 0)
-		ptr_cpy = ptr_cpy->next_room_list;
+		ptr_cpy = ptr_cpy->next;
 
 	
 	ft_putstr("2eme salle : ");
@@ -66,7 +66,7 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 	ft_putstr("Retour ptr a la salle ");
 	ft_putendl(ptr_cpy->name);
 //	while(ft_strcmp(ptr_cpy->name, room2) != 0)
-//		ptr_cpy = ptr_cpy->next_room_list;
+//		ptr_cpy = ptr_cpy->next;
 	
 	link2->next = ptr->next_map;
 	ptr->next_map = link2;
@@ -83,9 +83,9 @@ static int	ft_add_bounds(t_game *game, char *room1, char *room2, t_link *link1, 
 {
 	t_room *ptr;
 
-	ptr = game->room_start;
+	ptr = game->rooms;
 		while(ft_strcmp(ptr->name, room1) != 0 && ft_strcmp(ptr->name, room2) != 0)
-			ptr = ptr->next_room_list;
+			ptr = ptr->next;
 		if (ft_strcmp(ptr->name, room1) == 0 && ptr->name )
 			ft_add_link(ptr, room2, room1, link2, link1);
 		else if (ft_strcmp(ptr->name, room2) == 0)

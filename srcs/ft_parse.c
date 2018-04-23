@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/21 18:13:08 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/23 12:24:47 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int ft_display_lst(t_room *alst)
 	while (alst != NULL)
 	{
 		ft_putendl((*alst).name);
-		alst = alst->next_room_list;
+		alst = alst->next;
 	}
 	return (0);
 }
@@ -103,18 +103,20 @@ static int ft_display_lst(t_room *alst)
 int	ft_parse(char *line, t_game *game)
 {
 	if (game->f_section < 1)
+	{
+		ft_putendl("Probleme section");
 		return (-1);
+	}
 	if (ft_is_com(line))
 		ft_putstr("Comm : ");
 	else if (ft_is_start(line))
 	{
-		if (game->f_start > 0 && game->f_section == 1)
+		if (game->f_start > 0)
 		{
 			ft_putendl("Deux salles 'start' !");
 			return (-1);
 		}
 		game->f_start++;
-	//	game->room_start->nb_room = -1;
 		ft_putstr("Start: ");
 	}
 	else if (ft_is_end(line))
@@ -125,24 +127,26 @@ int	ft_parse(char *line, t_game *game)
 			return (-1);
 		}
 		game->f_end++;
-	//	game->room_start->nb_room = -2;
 		ft_putstr("End  : ");
-		game->f_section = 2;
 	}
-	else if (ft_is_room(line) && (game->f_section == 1 || game->f_section == 2))
+	else if (ft_is_room(line) && game->f_section == 1)
 	{
-		if (game->f_end == 1 && game->f_section == 3)
-		{
-			ft_putendl("salle end deja trouvee, plus de room acceptee");
-			return (-1);
-		}
-		if (game->f_section == 2)
-			game->f_section = 3;
 		game->nb_rooms++;
 		ft_putstr("Room: ");
 		ft_create_room(game, line);
+		if (game->f_end == 1 && game->f_start == 1) // derniere salle ajoutee est end : on change de section et on conserve adresse de end
+		{
+			game->room_end = game->rooms;
+			game->room_end->nb_room = -2;
+			game->f_section = 2;
+		}
+		else if (game->f_start == 1 && game->f_end == 0) // derniere salle ajoutee est start : on change de section et on conserve adresse de end
+		{
+			game->room_start = game->rooms;
+			game->room_start->nb_room = -1;
+		}
 	}
-	else if (ft_is_tube(line) && game->f_section == 3)
+	else if (ft_is_tube(line) && game->f_section == 2)
 	{
 		ft_create_bounds(game, line);
 		ft_putstr("Tube: ");
