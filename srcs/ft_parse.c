@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/23 12:24:47 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/23 14:32:11 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	ft_parse(char *line, t_game *game)
 		game->f_end++;
 		ft_putstr("End  : ");
 	}
-	else if (ft_is_room(line) && game->f_section == 1)
+	else if (ft_is_room(line) && (game->f_section == 1 || game->f_section == 2))
 	{
 		game->nb_rooms++;
 		ft_putstr("Room: ");
@@ -138,15 +138,16 @@ int	ft_parse(char *line, t_game *game)
 		{
 			game->room_end = game->rooms;
 			game->room_end->nb_room = -2;
-			game->f_section = 2;
+			game->f_section = 3;
 		}
-		else if (game->f_start == 1 && game->f_end == 0) // derniere salle ajoutee est start : on change de section et on conserve adresse de end
+		else if (game->f_start == 1 && game->f_end == 0 && game->f_section == 1) // derniere salle ajoutee est start : on change de section et on conserve adresse de end
 		{
 			game->room_start = game->rooms;
 			game->room_start->nb_room = -1;
+			game->f_section = 2;
 		}
 	}
-	else if (ft_is_tube(line) && game->f_section == 2)
+	else if (ft_is_tube(line) && game->f_section == 3)
 	{
 		ft_create_bounds(game, line);
 		ft_putstr("Tube: ");

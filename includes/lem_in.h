@@ -14,8 +14,8 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+# include "libft.h"
+# include "get_next_line.h"
 
 typedef struct					s_ant
 {
@@ -65,7 +65,7 @@ typedef struct					s_game
 
 typedef struct					s_paths
 {
-				t_room			*room;// pointeur vers la premiere salle de chaque chemin court
+				t_room			**sh_path;// pointeur vers la premiere salle de chaque chemin court
 				struct s_paths	*next;// pointeur vers chemin le plus court suivant
 }								t_paths;
 
@@ -96,5 +96,6 @@ int								ft_create_bounds(t_game *game, char *line);
 int								ft_create_room(t_game *game, char *line);
 int								ft_size_path(int *path);
 void							ft_comptabilities(t_game *game, t_ways **start, int n);
+t_paths							*ft_short_path(t_game *game);
 
 #endif
