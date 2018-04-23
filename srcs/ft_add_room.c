@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:57:20 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/23 11:57:06 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/23 17:47:25 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	int	ft_find_room(t_room *lst_room, t_room *new_room)
 		ft_putendl("room deja existante (coordonnees)");
 		return (1);
 	}
-	ft_putstr("OK room\n");
+//	ft_putstr("OK room\n");
 	return (0);
 }
 
@@ -71,9 +71,11 @@ int	ft_create_room(t_game *game, char *line)
 {
 	t_room *room;
 
-	room = (t_room *)malloc(sizeof(t_room));
+	if (!(room = (t_room *)malloc(sizeof(t_room))))
+		return (-1);
 	ft_bzero(room, sizeof(t_room));
 	game->nb_rooms++;
+	ft_putnbr(game->nb_rooms);
 	ft_load_room(room, line, game->nb_rooms);
 	if (ft_add_room(game, room) == 1)
 		ft_memdel((void *)room);
