@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/23 14:32:11 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/23 18:26:12 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,12 @@ int	ft_parse(char *line, t_game *game)
 		game->f_end++;
 		ft_putstr("End  : ");
 	}
-	else if (ft_is_room(line) && (game->f_section == 1 || game->f_section == 2))
+	else if (ft_is_room(line) && (game->f_section == 1 || game->f_section == 2 || game->f_section == 3))
 	{
 		game->nb_rooms++;
 		ft_putstr("Room: ");
 		ft_create_room(game, line);
-		if (game->f_end == 1 && game->f_start == 1) // derniere salle ajoutee est end : on change de section et on conserve adresse de end
+		if (game->f_end == 1 && game->f_start == 1 && game->f_section < 3) // derniere salle ajoutee est end : on change de section et on conserve adresse de end
 		{
 			game->room_end = game->rooms;
 			game->room_end->nb_room = -2;
@@ -155,7 +155,7 @@ int	ft_parse(char *line, t_game *game)
 	else
 	{
 		ft_putendl("FORMAT ERROR");
-		return (-1);
+		return (-2);
 	}
 	ft_putendl(line);
 	return (0);

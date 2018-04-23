@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/23 17:51:08 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:15:52 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,25 @@
 static int		ft_new_shortpath(t_game *game, t_pile *current, t_paths **list_paths)
 {
 	t_paths *new_path;
-	
+	int		k;
+
+	k = 0;
+	while (current->path[k])
+		k++;
 	if(!(new_path = (t_paths*)malloc(sizeof(*new_path))))
 		return (0);
 	ft_bzero(new_path, sizeof(*new_path));
-	if(!(new_path->sh_path = (t_room**)malloc(sizeof(t_room*) * (game->nb_rooms))))
+	if(!(new_path->sh_path = (t_room**)malloc(sizeof(t_room*) * (k + 2))))
 		return (0);
-	ft_bzero(new_path->sh_path, sizeof(t_room*) * (game->nb_rooms));
-	ft_memcpy(new_path->sh_path, current->path, sizeof(t_room*) * (game->nb_rooms));
+	ft_bzero(new_path->sh_path, sizeof(t_room*) * (k + 2));
+	ft_memcpy(new_path->sh_path, current->path, sizeof(t_room*) * (k + 2));
 	if (*list_paths != 0)
 		new_path->next = *list_paths;
 	*list_paths = new_path;
 	return (1);
 }
 
-static int		ft_add_link(t_game *game, t_pile *current, t_link *link)
+static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 {
 	t_pile *new;
 	int		i;
@@ -38,9 +42,9 @@ static int		ft_add_link(t_game *game, t_pile *current, t_link *link)
 	if (!(new = (t_pile*)malloc(sizeof(t_pile))))
 		return (0);
 	ft_bzero(new, sizeof(t_pile));
-	if (!(new->path = (t_room**)malloc(sizeof(t_room*) * (game->nb_rooms))))
+	if (!(new->path = (t_room**)malloc(sizeof(t_room*) * (k + 2))))
 		return (0);
-	ft_bzero(new->path, sizeof(t_room*) * (game->nb_rooms));
+	ft_bzero(new->path, sizeof(t_room*) * (k + 2));
 	while (current->path[i] != 0)
 	{
 		new->path[i] = current->path[i];
@@ -71,7 +75,7 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 		c = 0;
 		while (current->path[i] != 0)
 			(current->path[i++] == link->room ? c++ : 1);
-		(c == 0 ? ft_add_link(game, current, link) : 0);
+		(c == 0 ? ft_add_link(game, current, link, i) : 0);
 		link = link->next;
 	}
 	return (1);
