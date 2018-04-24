@@ -6,11 +6,11 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/24 16:05:08 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/24 16:26:52 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 #include <stdio.h>
 
 int ft_is_start(char *line)
@@ -139,7 +139,7 @@ int	ft_parse(char *line, t_game *game)
 	{
 //		ft_putstr("Room: ");
 		ft_create_room(game, line);
-		if (game->f_end == 1 && game->f_start == 1) // derniere salle ajoutee est end : on change de section et on conserve adresse de end
+		if (game->f_end == 1 && game->f_start == 1 && game->f_section < 3) // derniere salle ajoutee est end : on change de section et on conserve adresse de end
 		{
 			game->room_end = game->rooms;
 			game->room_end->nb_room = -2;
@@ -150,6 +150,7 @@ int	ft_parse(char *line, t_game *game)
 			game->room_start = game->rooms;
 			game->f_section = 2;
 			game->room_start->nb_room = -1;
+			game->f_section = 2;
 		}
 	}
 	else if (ft_is_tube(line) && game->f_section == 3)
