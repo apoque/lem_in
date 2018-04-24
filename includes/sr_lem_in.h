@@ -14,8 +14,8 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+# include "libft.h"
+# include "get_next_line.h"
 
 typedef struct					s_ant
 {
@@ -24,6 +24,7 @@ typedef struct					s_ant
 	int				nb_moves; // nombre de coup deja joue
 	int				nb_room; // numero de la salle ou elle se trouve
 	int				wave; // numero de la vague de depart
+	struct	s_ant	*next; //fourmi suivante
 }								t_ant;
 
 typedef struct					s_room

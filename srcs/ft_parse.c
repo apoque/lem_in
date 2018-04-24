@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/23 19:23:00 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/24 16:05:08 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ int ft_is_room(char *line)
 	int nb_coord;
 	int nb_char;
 
-	i = ft_strlen(line);
+	i = ft_strlen(line) - 1;
 	nb_coord = 0;
 	nb_char = 0;
 	while (i >= 0)
 	{
-		while (ft_isdigit(line[i]))
+		while (ft_isdigit(line[i]) && nb_coord < 2)
 			i--;
 		if (line[i] == ' ' && nb_coord < 2)
 			nb_coord++;
@@ -87,6 +87,7 @@ int ft_is_room(char *line)
 	ft_putnbr(nb_coord);
 	ft_putchar('-');
 	ft_putnbr(nb_char);
+	ft_putchar('\n');
 	//set_error si error
 	return (0);
 }
@@ -105,6 +106,7 @@ static int ft_display_lst(t_room *alst)
 
 int	ft_parse(char *line, t_game *game)
 {
+	ft_putstr("Line : ");
 	ft_putendl(line);
 	if (game->f_section < 1)
 	{
