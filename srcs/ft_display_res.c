@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/03/06 17:01:37 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:53:35 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,22 @@ char		*ft_get_room_name(t_game *game, int ant, t_room **start)
 	int		room_nb;
 	t_room	*room;
 
+	printf("YOOOO\n");
 	room_nb = game->ants[ant].path[game->ants[ant].nb_moves + 1];
 	room = *start;
 	while (room->nb_room != room_nb && room->next != NULL)
 	{
+		printf("YOOOO\n");
 		room = room->next;
+		printf("YIII\n");
 	}
+	printf("YIII\n");
 	return (room->name);
 }
 
 void		ft_move_ant(t_game *game, int ant, int wave)
 {
+	printf("YOOOO\n");
 	printf("L%i-%s", game->ants[ant].nb + 1, ft_get_room_name(game, ant, game->rooms));
 	if (ft_is_last(game, ant, wave) == 0 || (game->ants[ant].wave == 0 && ant + 1 < game->nb_ants && ft_size_path(game->ants[ant].path) == 2))
 		putchar(' ');
@@ -81,7 +86,18 @@ void		ft_display_res(t_game *game)
 	int	wave;
 	int	i;
 
+	t_room *room;
 	wave = 0;
+
+	i = 0;
+	room = game->rooms;
+	while (room->next != NULL)
+	{
+		printf("room n*%i = |%s| & nb = %i\n", i, room->name, room->nb_room);
+		room = room->next;
+		i++;
+	}
+
 	while (ft_all_arrived(game) == 0)
 	{
 		i = 0;

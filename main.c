@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/24 15:08:18 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/24 18:11:25 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,38 @@ int main()
 {
 	char *line;
 	int i; // nb lignes utiliser structure apres 
+	t_ways	*list_paths;
 	t_game game;
 
 	ft_bzero(&game, sizeof(t_game));
+
+	t_set	set;
+	int		k;
+	int		m;
+
+	k = 0;
+	game.n = 3;
+	set.set = (int **)malloc(sizeof(int *) * game.n);
+	while (k < game.n)
+	{
+		m = 0;
+		set.set[k] = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
+		while (m <= game.nb_rooms)
+		{
+			set.set[k][m] = -3;
+			m++;
+		}
+		k++;
+	}
+	set.nb_path = 0;
+	set.cost = 0;
+
+	game.set = set;
+	game.set.found = 0;
+
+
+
+
 	i = 0;
 		while (get_next_line(0, &line))
 		{
@@ -139,5 +168,6 @@ int main()
 	ft_putendl("--------------------------");
 //	ft_display_lines(&game);
 	ft_putendl("--------------------------");
+	list_paths = ft_short_path(&game);
 	return (0);
 }

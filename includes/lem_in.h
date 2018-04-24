@@ -25,6 +25,7 @@ typedef struct					s_ant
 				int				nb_moves; // nombre de coup deja joue
 				int				nb_room; // numero de la salle ou elle se trouve
 				int				wave; // numero de la vague de depart
+				struct	s_ant	*next; //fourmi suivante
 }								t_ant;
 
 typedef struct					s_room
@@ -49,6 +50,12 @@ typedef struct					s_link
 				struct s_link	*next;// pointeur vers chemin le plus court suivant
 }								t_link;
 
+typedef struct					s_line
+{
+	char			*str;
+	struct s_line	*next;
+}								t_line;
+
 typedef struct					s_set
 {
 				int				**set;
@@ -64,6 +71,7 @@ typedef struct					s_game
 				t_room			*room_start; // debut de la liste chainee des salles
 				t_room			*room_end; // fin de la liste chainee des salles
 				t_set			set;
+				t_line			*lines; // liste des lines
 				int				**paths; // tableau des n chemins les plus cours
 				int				f_start;
 				int				f_end;

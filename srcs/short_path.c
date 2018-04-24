@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 17:14:05 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:12:36 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ t_ways		*ft_short_path(t_game *game)
 		free(ptr->path);
 		free(ptr);
 	}
-
 	ft_print_set(game->set.set, game->set.nb_path);
+	ft_select_path(game);
+	ft_display_res(game);
 	return (list_ways);
 }

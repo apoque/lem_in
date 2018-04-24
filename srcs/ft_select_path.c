@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/17 09:54:17 by apoque           ###   ########.fr       */
+/*   Updated: 2018/04/24 18:12:43 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void		ft_give_path(t_game *game, int path, int ant, int wave)
 	int size_path;
 
 	i = 0;
-	size_path = ft_size_path(game->paths[path]);
+	size_path = ft_size_path(game->set.set[path]);
 	game->ants[ant].wave = wave;
 	if (size_path == 2)
 		game->ants[ant].wave = 0;
 	game->ants[ant].path = (int *)malloc(sizeof(int) * (size_path + 1));
-	while (game->paths[path][i] != -3)
+	while (game->set.set[path][i] != -3)
 	{
-		game->ants[ant].path[i] = game->paths[path][i];
+		game->ants[ant].path[i] = game->set.set[path][i];
 		i++;
 	}
 	//printf("fourmi n*%i wave = %i\n", ant, game->ants[ant].wave);
@@ -81,7 +81,7 @@ int			ft_is_best_path(t_game *game, int path, int ant)
 	i = 0;
 	while (i < path && is_best == 1)
 	{
-		if (ft_size_path(game->paths[path]) - ft_size_path(game->paths[i]) >= game->nb_ants - ant)
+		if (ft_size_path(game->set.set[path]) - ft_size_path(game->set.set[i]) >= game->nb_ants - ant)
 			is_best = 0;
 		i++;
 	}
@@ -102,9 +102,9 @@ void		ft_select_path(t_game *game)
 	while (ant < game->nb_ants)
 	{
 		path = 0;
-		while (path < game->nb_paths && ant < game->nb_ants)
+		while (path < game->set.nb_path && ant < game->nb_ants)
 		{
-			if (ft_check_path(game, game->paths[path], ant, wave) == 1 && ft_is_best_path(game, path, ant) == 1)
+			if (ft_check_path(game, game->set.set[path], ant, wave) == 1 && ft_is_best_path(game, path, ant) == 1)
 			{
 				ft_give_path(game, path, ant, wave);
 				ant++;
