@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/03/06 17:01:37 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 16:00:31 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ int			**ft_ordonate_set(int **set, int n)
 	return (set);
 }
 
+void			ft_change_set(t_game *game, int **set, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		game->set.set[i] = set[i];
+		i++;
+	}
+	while (i < game->n)
+	{
+		game->set.set[i] = NULL;
+		i++;
+	}
+}
+
 void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 {
 	int	k;
@@ -51,6 +68,15 @@ void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 	paths_used = 0;
 	k = 0;
 	cost = ft_size_path(set[paths_used]) - 2;
+
+	/*int i;
+	i = 0;
+	while (set[0][i] != -3)
+	{
+		printf("%i-", set[0][i]);
+		i++;
+	}
+	printf("\n");*/
 
 	while (ants > 0)
 	{
@@ -69,11 +95,12 @@ void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 			cost++;
 		}
 	}
-	if (cost < game->set. cost || game->set.cost == 0)
+	if (cost < game->set.cost || game->set.cost == 0)
 	{
 		game->set.cost = cost;
 		game->set.found = 1;
-		//ft_change_set(game, set);
+		game->set.nb_path = n;
+		ft_change_set(game, set, n);
 	}
-	printf("This set will cost %i\n\n", cost);
+	printf("This set will cost %i\n", cost);
 }
