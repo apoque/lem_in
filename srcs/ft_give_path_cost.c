@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 16:30:37 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:29:20 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,23 @@ void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 	int	paths_used;
 	int	cost;
 
-	set = ft_ordonate_set(set, n);
-	paths_used = 0;
-	k = 0;
-	cost = ft_size_path(set[paths_used]) - 2;
 
 	/*int i;
 	i = 0;
-	while (set[0][i] != -3)
+	printf("N = %i\n", n);
+	while (set[n -1][i] != -3)
 	{
-		printf("%i-", set[0][i]);
+		printf("%i-", set[n-1][i]);
 		i++;
 	}
 	printf("\n");*/
 
+
+
+	set = ft_ordonate_set(set, n);
+	paths_used = 0;
+	k = 0;
+	cost = ft_size_path(set[paths_used]) - 2;
 	while (ants > 0)
 	{
 		if (paths_used < n - 1)

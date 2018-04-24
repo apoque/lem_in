@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 16:44:17 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:14:05 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void		ft_min_path(t_game *game)
 
 	nb_start = 0;
 	nb_end = 0;
+	game->nb_ants = 100;
 	link = game->room_start->next_map;
 	while (link != 0)
 	{
@@ -32,8 +33,9 @@ static void		ft_min_path(t_game *game)
 		nb_end++;
 		link = link->next;
 	}
-	game.n = ((game->nb_ants < nb_end) ? game->nb_ants : nb_end);
-	game.n = ((nb_start < game.n) ? nb_start : game.n);
+	game->n = ((game->nb_ants < nb_end) ? game->nb_ants : nb_end);
+	game->n = ((nb_start < game->n) ? nb_start : game->n);
+	printf("nb fourmi = %i, nb_start = %i, nb_end = %i, MIN = %i\n", game->nb_ants, nb_start, nb_end, game->n);
 }
 
 static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)

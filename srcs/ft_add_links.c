@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:56:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/23 17:21:49 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/24 17:08:27 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 */	link1->room = ptr;
 /*	
 	ft_putendl("Lien 1 cree.");
+
 	
-*/	while(ft_strcmp(ptr_cpy->name, room1) != 0)
+*/	
+	printf("Le ptr_cpy name vaut : %s\n", ptr_cpy->name);
+	printf("room1 vaut : %s\n", room1);
+	while(ptr_cpy->next && ft_strcmp(ptr_cpy->name, room1) != 0)
 		ptr_cpy = ptr_cpy->next;
 
 	

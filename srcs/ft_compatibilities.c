@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 15:59:14 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:28:11 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_print_set(int **set, int n)
 	int	j;
 
 	i = 0;
-	printf("SET\n");
+	printf("SET & n = %i\n", n);
 	while (i < n)
 	{
 		j = 0;
@@ -86,7 +86,8 @@ void		ft_recursive(t_game *game, int ***sett, int *ii, t_ways **way_bi, int *nn)
 			{
 				//printf("X = %i\n", n);
 				//ft_print_set(set, n);
-				ft_give_path_cost(game, set, game->n, game->nb_ants);
+				ft_give_path_cost(game, set, n, game->nb_ants);
+				//printf("YO\n");
 			}
 			else
 				ft_recursive(game, &set, &i, &(way_bis->next), &n);
@@ -121,8 +122,8 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n) //ft a appeler a c
 			n--;
 		}
 		//printf("n = %i & found = %i\n", n, game->set.found);
-		//if (game->set.found == 0)
-		ft_give_path_cost(game, set, n, game->nb_ants);
+		if (n == 1)
+			ft_give_path_cost(game, set, n, game->nb_ants);
 		//printf("n = %i & found = %i\n", n, game->set.found);
 		//printf("N = %i\n", n);
 		//if (game->set.found == 0)
