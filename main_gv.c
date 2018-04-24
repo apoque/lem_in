@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/23 17:48:19 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 10:09:56 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int main(int argc, const char *argv[])
 				game.f_section = 1;
 			}
 			else
-				ft_parse(line, &game);
+			{
+				if (ft_parse(line, &game) == -2)
+					return (0);
+			}
 			i++;
 		}
 	}
@@ -94,12 +97,13 @@ int main(int argc, const char *argv[])
 		j = 0;
 		while (list_paths->sh_path[j])
 		{
-			ft_printf("%s - ", list_paths->sh_path[j]->name);
+			ft_printf("%s %d - ", list_paths->sh_path[j]->name, list_paths->sh_path_nb[j]);
 			j++;
 		}
 		ft_printf("\n");
 		list_paths = list_paths->next;
 	}
+	printf("%s %d\n", game.room_start->name, game.room_start->nb_room);
 
 	return (0);
 }

@@ -58,6 +58,7 @@ typedef struct					s_game
 				int				f_start;
 				int				f_end;
 				int				f_section;
+				int				n;// min
 				int				nb_rooms; // nombre total de salle
 				int				nb_ants; // nombre total de fourmi
 				int				nb_paths; // nombre de chemins selectionnes
@@ -66,6 +67,7 @@ typedef struct					s_game
 typedef struct					s_paths
 {
 				t_room			**sh_path;// pointeur vers la premiere salle de chaque chemin court
+				int				*sh_path_nb;// tableau du chemin avec les entiers pour combinatoire
 				struct s_paths	*next;// pointeur vers chemin le plus court suivant
 }								t_paths;
 
@@ -97,5 +99,6 @@ int								ft_create_room(t_game *game, char *line);
 int								ft_size_path(int *path);
 void							ft_comptabilities(t_game *game, t_ways **start, int n);
 t_paths							*ft_short_path(t_game *game);
+int								ft_new_shortpaht(t_game *game, t_pile *current, t_paths **list_paths);
 
 #endif
