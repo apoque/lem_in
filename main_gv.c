@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/24 10:09:56 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:31:24 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,36 @@ int main(int argc, const char *argv[])
 	char *line;
 	int i; // nb lignes utiliser structure apres 
 	t_game game;
-	t_paths		*list_paths;
+	t_ways	*list_paths;
 	int j;
 
 	ft_bzero(&game, sizeof(t_game));
+
+	t_set	set;
+	int		k;
+	int		m;
+
+	k = 0;
+	game.n = 3;
+	set.set = (int **)malloc(sizeof(int *) * game.n);
+	while (k < game.n)
+	{
+		m = 0;
+		set.set[k] = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
+		while (m <= game.nb_rooms)
+		{
+			set.set[k][m] = -3;
+			m++;
+		}
+		k++;
+	}
+	set.nb_path = 0;
+	set.cost = 0;
+
+	game.set = set;
+	game.set.found = 0;
+
+
 
 	i = 0;
 	j = 0;
@@ -97,13 +123,12 @@ int main(int argc, const char *argv[])
 		j = 0;
 		while (list_paths->sh_path[j])
 		{
-			ft_printf("%s %d - ", list_paths->sh_path[j]->name, list_paths->sh_path_nb[j]);
+			ft_printf("%s %d - ", list_paths->sh_path[j]->name, list_paths->way[j]);
 			j++;
 		}
 		ft_printf("\n");
 		list_paths = list_paths->next;
 	}
-	printf("%s %d\n", game.room_start->name, game.room_start->nb_room);
 
 	return (0);
 }

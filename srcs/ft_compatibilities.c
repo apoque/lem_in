@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/03/06 17:01:37 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:59:14 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void		ft_print_set(int **set, int n)
 	printf("SET\n");
 	while (i < n)
 	{
-		j = 1;
-		printf("chemin n*%i = ", i + 1);
+		j = 0;
 		while (set[i][j] != -2)
 		{
 			printf("%i-", set[i][j]);
@@ -85,7 +84,8 @@ void		ft_recursive(t_game *game, int ***sett, int *ii, t_ways **way_bi, int *nn)
 		{
 			if (++i == n)
 			{
-				ft_print_set(set, n);
+				//printf("X = %i\n", n);
+				//ft_print_set(set, n);
 				ft_give_path_cost(game, set, game->n, game->nb_ants);
 			}
 			else
@@ -106,20 +106,30 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n) //ft a appeler a c
 
 	way = *start;
 	set = (int **)malloc(sizeof(int *) * n);
+	//ft_bzero(&set, sizeof(int *) * n);
+
 	//while (way != NULL)
 	//{
 		i = 0;
 		set[i] = way->way;
 		way_bis = way->next;
 		i++;
-		while (n > 1 && game->set.found == 0)
+		while (n > 1)
 		{
+			//printf("n = %i & found = %i\n", n, game->set.found);
 			ft_recursive(game, &set, &i, &way_bis, &n);
 			n--;
 		}
-		ft_print_set(set, n);
-		if (game->set.found == 0)
-			ft_give_path_cost(game, set, n, game->nb_ants);
+		//printf("n = %i & found = %i\n", n, game->set.found);
+		//if (game->set.found == 0)
+		ft_give_path_cost(game, set, n, game->nb_ants);
+		//printf("n = %i & found = %i\n", n, game->set.found);
+		//printf("N = %i\n", n);
+		//if (game->set.found == 0)
+		//	printf("I = %i\n", game->set.set[0][0]);
+		//if (game->set.found != 0)
+		//	ft_print_set(game->set.set, n);
 		//way = way->next;
 	//}
+	free(set);
 }

@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 13:55:55 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:56:31 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 	i = 0;
 	while (current->path[i] != 0)
 		i++;
-	if (i > 0 && current->path[i - 1] == game->room_end)
+	if (current->path[i - 1] == game->room_end)
 		return (0);
 	link = current->path[i - 1]->next_map;
 	while (link)
@@ -72,23 +72,25 @@ static t_pile	*ft_init_pile(t_pile *current, t_game *game)
 	return (current);
 }
 
-t_paths		*ft_short_path(t_game *game)
+t_ways		*ft_short_path(t_game *game)
 {
-	t_paths *list_paths;
+	t_ways *list_ways;
 	t_pile	*current;
 	t_pile	*ptr;
 
 	ptr = 0;
-	list_paths = 0;
+	list_ways = 0;
 	current = ft_init_pile(current, game);
 	while (current)
 	{
 		if (!ft_add_blocks(game, current))
-			ft_new_shortpath(game, current, &list_paths);
+			ft_new_shortpath(game, current, &list_ways);
 		ptr = current;
 		current = current->next;
 		free(ptr->path);
 		free(ptr);
 	}
-	return (list_paths);
+
+	ft_print_set(game->set.set, game->set.nb_path);
+	return (list_ways);
 }
