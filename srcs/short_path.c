@@ -6,11 +6,35 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 15:56:31 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/24 16:44:17 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static void		ft_min_path(t_game *game)
+{
+	int		nb_start;
+	int		nb_end;
+	t_link *link;
+
+	nb_start = 0;
+	nb_end = 0;
+	link = game->room_start->next_map;
+	while (link != 0)
+	{
+		nb_start++;
+		link = link->next;
+	}
+	link = game->room_end->next_map;
+	while (link != 0)
+	{
+		nb_end++;
+		link = link->next;
+	}
+	game.n = ((game->nb_ants < nb_end) ? game->nb_ants : nb_end);
+	game.n = ((nb_start < game.n) ? nb_start : game.n);
+}
 
 static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 {
@@ -81,6 +105,7 @@ t_ways		*ft_short_path(t_game *game)
 	ptr = 0;
 	list_ways = 0;
 	current = ft_init_pile(current, game);
+	ft_min_path(game);
 	while (current)
 	{
 		if (!ft_add_blocks(game, current))
