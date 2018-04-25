@@ -43,8 +43,12 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 	
 */	while(ptr_cpy->next && ft_strcmp(ptr_cpy->name, room1) != 0)
 		ptr_cpy = ptr_cpy->next;
-
 	
+	if (ft_strcmp(ptr_cpy->name, room1) != 0)
+	{
+		ft_putendl("error");
+		return (-1);
+	}
 	ft_putstr("2eme salle : ");
 	ft_putendl(ptr_cpy->name);
 	
@@ -65,9 +69,16 @@ static int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 /*	
 	ft_putstr("Retour ptr a la salle ");
 	ft_putendl(ptr_cpy->name);
-*///	while(ft_strcmp(ptr_cpy->name, room2) != 0)
-//		ptr_cpy = ptr_cpy->next;
-	
+*/
+
+while(ptr_cpy->next && ft_strcmp(ptr_cpy->name, room2) != 0)
+		ptr_cpy = ptr_cpy->next;
+
+	if (ft_strcmp(ptr_cpy->name, room2) != 0)
+	{
+		ft_putendl("error");
+		return (-1);
+	}
 	link2->next = ptr->next_map;
 	ptr->next_map = link2;
 	
@@ -116,13 +127,13 @@ int	ft_create_bounds(t_game *game, char *line)
 	link2 = (t_link *)malloc(sizeof(t_link));
 	ft_bzero(link1, sizeof(t_link));
 	ft_bzero(link2, sizeof(t_link));
-/*	ft_putchar('\n');
+	ft_putchar('\n');
 	ft_putendl("--------------------------------");
 	ft_putchar('\n');
 	ft_putstr("room 1 : ");
 	ft_putendl(room1);
 	ft_putstr("room 2 : ");
-	ft_putendl(room2);*/
+	ft_putendl(room2);
 	if (ft_add_bounds(game, room1, room2, link1, link2) == 1)
 	{
 		ft_memdel((void *)link1);

@@ -40,7 +40,7 @@ static int	ft_load_room(t_room *room, char *line, int room_id)
 	room->nb_room = room_id;
 	nb_coord = 0;
 	while (nb_coord < 2)
-	{
+{
 		while (ft_isdigit(line[i]))
 			i--;
 		if (line[i] == ' ' && nb_coord < 2)
@@ -75,7 +75,7 @@ int	ft_create_room(t_game *game, char *line)
 		return (-1);
 	ft_bzero(room, sizeof(t_room));
 	game->nb_rooms++;
-	ft_putnbr(game->nb_rooms);
+//	ft_putnbr(game->nb_rooms);
 	ft_load_room(room, line, game->nb_rooms);
 	if (ft_add_room(game, room) == 1)
 		ft_memdel((void *)room);

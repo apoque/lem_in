@@ -104,5 +104,13 @@ int								ft_create_bounds(t_game *game, char *line);
 int								ft_create_room(t_game *game, char *line);
 int								ft_size_path(int *path);
 void							ft_comptabilities(t_game *game, t_ways **start, int n);
+int								ft_display_lst(t_room *room);
+int								ft_is_start(char *line);
+int								ft_is_end(char *line);
+int								ft_is_com(char *line);
+int								ft_is_tube(char *line);
+int								ft_is_room(char *line);
+int								ft_create_ant(t_game *game);
+int								ft_add_lants(t_game *game);
 
 #endif
