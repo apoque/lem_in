@@ -24,13 +24,13 @@ typedef struct					s_ant
 	int				nb_moves; // nombre de coup deja joue
 	int				nb_room; // numero de la salle ou elle se trouve
 	int				wave; // numero de la vague de depart
-	struct	s_ant	*next; //fourmi suivante
+	struct s_ant	*next; //fourmi suivante
 }								t_ant;
 
 typedef struct					s_room
 {
 	char			*name; // nom de la salle
-	int				nb_room; // numero de la salle 
+	int				nb_room; // numero de la salle
 	int				x; //coordonnees de la salle
 	int				y;
 	int				nb_bounds; //nombre de liaisons d une salle
@@ -66,6 +66,7 @@ typedef struct					s_game
 	int				f_start;
 	int				f_end;
 	int				f_section;
+	int				flag;
 	int				nb_rooms; // nombre total de salle
 	int				nb_ants; // nombre total de fourmi
 	int				nb_paths; // nombre de chemins selectionnes
@@ -76,7 +77,6 @@ typedef struct					s_paths
 	t_room			*room;// pointeur vers la premiere salle de chaque chemin court
 	struct s_paths	*next;// pointeur vers chemin le plus court suivant
 }								t_paths;
-
 
 typedef struct					s_ways
 {
@@ -110,7 +110,9 @@ int								ft_is_end(char *line);
 int								ft_is_com(char *line);
 int								ft_is_tube(char *line);
 int								ft_is_room(char *line);
-int								ft_create_ant(t_game *game);
 int								ft_add_lants(t_game *game);
+int								ft_add_line(char *line, t_game *game);
+int								ft_last_check(t_game *game);
+int								ft_display_lines(t_game *game);
 
 #endif

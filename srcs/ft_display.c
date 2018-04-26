@@ -1,7 +1,18 @@
-#include "lem_in.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_display.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 18:19:40 by srossi            #+#    #+#             */
+/*   Updated: 2018/04/26 18:26:41 by srossi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_display_lst(t_room *room)
+#include "lem_in.h"
+
+int	ft_display_lst(t_room *room)
 {
 	t_room *alst;
 	t_link *link;
@@ -25,6 +36,19 @@ int ft_display_lst(t_room *room)
 		}
 		ft_putchar('\n');
 		alst = alst->next;
+	}
+	return (0);
+}
+
+int	ft_display_lines(t_game *game)
+{
+	t_line *ptr;
+
+	ptr = game->lines;
+	while (ptr)
+	{
+		ft_putendl(ptr->str);
+		ptr = ptr->next;
 	}
 	return (0);
 }

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 18:34:49 by srossi            #+#    #+#             */
+/*   Updated: 2018/04/26 18:35:08 by srossi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-int ft_is_start(char *line)
+int	ft_is_start(char *line)
 {
 	if (line[0] == '#' && line[1] == '#' && ft_strcmp(&line[2], "start") == 0)
 		return (1);
 	return (0);
 }
 
-int ft_is_end(char *line)
+int	ft_is_end(char *line)
 {
 	if (line[0] == '#' && line[1] == '#' && ft_strcmp(&line[2], "end") == 0)
 		return (1);
@@ -21,7 +33,7 @@ int	ft_is_com(char *line)
 	return (0);
 }
 
-int ft_is_tube(char *line)
+int	ft_is_tube(char *line)
 {
 	int i;
 	int nb_minus;
@@ -39,29 +51,39 @@ int ft_is_tube(char *line)
 	return (0);
 }
 
-int ft_is_room(char *line)
+int	ft_is_room(char *line)
 {
 	int i;
-	int nb_coord;
-	int nb_char;
 
 	i = ft_strlen(line) - 1;
-	nb_coord = 0;
-	nb_char = 0;
 	if (!ft_isdigit(line[i]))
 		return (0);
-	while (i >= 0)
-	{
-		while (ft_isdigit(line[i]) && nb_coord < 2)
-			i--;
-		if (line[i] == ' ' && nb_coord < 2)
-			nb_coord++;
-		else if ((ft_isalpha(line[i]) || ft_isdigit(line[i]) || line[i] == ' ')
-		&& nb_coord == 2)
-			nb_char++;
+	while (i > 0 && ft_isdigit(line[i]))
 		i--;
+	if (i > 0 && line[i] == ' ')
+		i--;
+	else
+	{
+		if (line[i] == '-')
+			ft_putendl("Coord neg");
+		return (0);
 	}
-	if (nb_coord == 2 && nb_char > 0)
+	while (i > 0 && ft_isdigit(line[i]))
+		i--;
+	if (i > 0 && line[i] == ' ')
+		i--;
+	else
+	{
+		if (line[i] == '-')
+			ft_putendl("Coord neg");
+		return (0);
+	}
+	if (line[0] == 'L')
+	{
+		ft_putendl("Room starts with an 'L'");
+		return (0);
+	}
+	if (i >= 0)
 		return (1);
 	return (0);
 }

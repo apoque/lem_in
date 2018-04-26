@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_ants.c                                      :+:      :+:    :+:   */
+/*   ft_add_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 18:21:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/26 18:36:33 by srossi           ###   ########.fr       */
+/*   Created: 2018/04/26 18:14:30 by srossi            #+#    #+#             */
+/*   Updated: 2018/04/26 18:33:32 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static	int	ft_create_ant(t_game *game)
+int	ft_add_line(char *line, t_game *game)
 {
-	t_ant *new_ant;
+	t_line *new_line;
+	t_line *tmp;
 
-	if (!(new_ant = (t_ant*)malloc(sizeof(t_ant))))
+	tmp = game->lines;
+	if (line == NULL || game == NULL || !(new_line = malloc(sizeof(t_line))))
 		return (-1);
-	ft_bzero(new_ant, sizeof(t_ant));
-	new_ant->next = game->ants;
-	game->ants = new_ant;
-	return (0);
-}
-
-int			ft_add_lants(t_game *game)
-{
-	int i;
-
-	i = 0;
-	while (i < game->nb_ants)
+	ft_bzero(new_line, sizeof(t_line));
+	if (game->lines == NULL)
 	{
-		ft_create_ant(game);
-		game->ants->nb = i;
-		i++;
+		game->lines = new_line;
+		new_line->str = ft_strdup(line);
+	}
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		new_line->str = ft_strdup(line);
+		tmp->next = new_line;
 	}
 	return (0);
 }
