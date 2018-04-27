@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 17:28:11 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:55:18 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		ft_recursive(t_game *game, int ***sett, int *ii, t_ways **way_bi, int *nn)
 			if (++i == n)
 			{
 				//printf("X = %i\n", n);
-				//ft_print_set(set, n);
+				ft_print_set(set, n);
 				ft_give_path_cost(game, set, n, game->nb_ants);
 				//printf("YO\n");
 			}
@@ -117,15 +117,12 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n) //ft a appeler a c
 		i++;
 		while (n > 1)
 		{
-			//printf("n = %i & found = %i\n", n, game->set.found);
 			ft_recursive(game, &set, &i, &way_bis, &n);
 			n--;
 		}
-		//printf("n = %i & found = %i\n", n, game->set.found);
 		if (n == 1)
 			ft_give_path_cost(game, set, n, game->nb_ants);
 		//printf("n = %i & found = %i\n", n, game->set.found);
-		//printf("N = %i\n", n);
 		//if (game->set.found == 0)
 		//	printf("I = %i\n", game->set.set[0][0]);
 		//if (game->set.found != 0)

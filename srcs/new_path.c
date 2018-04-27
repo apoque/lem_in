@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:47:49 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 09:32:51 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:58:06 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 {
 	t_ways *new_path;
+	//t_ways *ptr;
 	int		k;
+	//int		i;
 
 	k = 0;
 	while (current->path[k])
@@ -31,16 +33,27 @@ int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 	while (new_path->sh_path[k])
 	{
 		new_path->way[k] = new_path->sh_path[k]->nb_room;
-		printf("%s %d\n", new_path->sh_path[k]->name, new_path->sh_path[k]->nb_room);
+		//printf("%s %d\n", new_path->sh_path[k]->name, new_path->sh_path[k]->nb_room);
 		k++;
 	}
 	new_path->way[k] = -3;
 	if (*list_ways != 0)
 		new_path->next = *list_ways;
 	*list_ways = new_path;
-	//printf("A\n");
+	/*ptr = *list_ways;
+	while (ptr)
+	{
+		i = 0;
+		while (ptr->sh_path[i])
+		{
+			printf("%d - ", ptr->sh_path[i]->nb_room);
+			i++;
+		}
+		printf("\n");
+		ptr = ptr->next;
+	}*/
+
 	ft_compatibilities(game, list_ways, game->n);
-	//printf("B\n");
 	return (0);
 }
 

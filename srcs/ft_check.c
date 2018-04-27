@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:34:49 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/26 18:35:08 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 10:51:23 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_is_tube(char *line)
 	int i;
 	int nb_minus;
 
+//	ft_putendl("TUBE");
 	i = 0;
 	nb_minus = 0;
 	while (line[i])
@@ -55,6 +56,7 @@ int	ft_is_room(char *line)
 {
 	int i;
 
+//	ft_putendl("ROOM !");
 	i = ft_strlen(line) - 1;
 	if (!ft_isdigit(line[i]))
 		return (0);

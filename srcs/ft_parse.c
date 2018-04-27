@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 09:34:04 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 10:50:35 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,17 @@ int	ft_parse(char *line, t_game *game)
 		}
 		game->f_end++;
 	}
+	else if (ft_is_tube(line) && game->f_start == 2 && game->f_end == 2)
+	{
+		if (ft_create_bounds(game, line) != 0)
+		{
+			ft_putendl("error de tube");
+			return (-1);
+		}
+		game->f_section = 2;
+	}
+	else if (ft_is_tube(line) && !(game->f_start == 2 && game->f_end == 2))
+		return (-2);
 	else if (ft_is_room(line) && (game->f_section < 2))
 	{
 		if (ft_create_room(game, line) == -1)
@@ -75,17 +86,6 @@ int	ft_parse(char *line, t_game *game)
 		}
 		game->flag = 0;
 	}
-	else if (ft_is_tube(line) && game->f_start == 2 && game->f_end == 2)
-	{
-		if (ft_create_bounds(game, line) != 0)
-		{
-			ft_putendl("error de tube");
-			return (-1);
-		}
-		game->f_section = 2;
-	}
-	else if (ft_is_tube(line) && !(game->f_start == 2 && game->f_end == 2))
-		return (-2);
 	else
 	{
 		ft_putendl("FORMAT ERROR");

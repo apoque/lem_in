@@ -6,7 +6,7 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/27 09:49:19 by gvannest         ###   ########.fr        #
+#    Updated: 2018/04/27 11:20:37 by gvannest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC_NAME = \
 		   short_path.c \
 		   new_path.c \
 		   ft_give_path_cost.c\
-		   ft_compabilities.c\
+		   ft_compatibilities.c\
 		   ft_display_res.c\
 		   ft_select_path.c\
 
@@ -61,11 +61,10 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 
 # FLAGS
-CPPFLAGS = -I./includes/ -I./libft -I./gnl/includes
+CPPFLAGS = -I./includes/ -I./libft/include
 LDFLAGS = -L./libft/
 LFT = -lft
 LIBFT = $(LDFLAGS) $(LFT)
-GNL = gnl/objs/get_next_line.o
 
 # **************************************************************************** #
 # SPECIAL CHARS
@@ -95,13 +94,10 @@ default:
 	@make $(DEFRULE)
 
 .PHONY: all
-all: libftcomp gnlcomp $(OBJ_PATH) $(NAME)
+all: libftcomp $(OBJ_PATH) $(NAME) Makefile
 
 libftcomp:
 	@make all -C $(LIBFT_PATH)
-
-gnlcomp:
-	@make all -C $(GNL_PATH)
 
 $(NAME): $(OBJ)
 	@echo -e "--$(LOG_CLEAR)$(LOG_MAGENTA)$(NAME)$(LOG_NOCOLOR)....................... $(LOG_ORANGE)assembling$(LOG_NOCOLOR)$(LOG_UP)"
@@ -111,7 +107,6 @@ $(NAME): $(OBJ)
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 #$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(GNL_PATH).c
 	@echo -e "--$(LOG_CLEAR)$(LOG_MAGENTA)$(NAME)$(LOG_NOCOLOR)........................ $(LOG_YELLOW)$<$(LOG_NOCOLOR)$(LOG_UP)"
-	@sleep 2
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(ADDFLAGS) -c -o $@ $^
 
 $(OBJ_PATH):
@@ -123,16 +118,12 @@ clean:
 	@echo -e "$(LOG_CLEAR)$(LOG_BLUE)clean $(NAME)$(LOG_NOCOLOR)"
 	@echo -e "--$(LOG_CLEAR)$(LOG_YELLOW)Objects$(LOG_NOCOLOR) deleted.............. $(LOG_RED)×$(LOG_NOCOLOR)"
 	@rm -rf $(OBJ_PATH)
-	@echo -e "$(LOG_CLEAR)$(LOG_BLUE)clean gnl$(LOG_NOCOLOR)"
-	@make clean -C $(GNL_PATH)
 	@echo -e "$(LOG_CLEAR)$(LOG_BLUE)clean libft$(LOG_NOCOLOR)"
 	@make clean -C $(LIBFT_PATH)
 	@echo -e "--$(LOG_CLEAR)$(LOG_YELLOW)Objects$(LOG_NOCOLOR) deleted.............. $(LOG_RED)×$(LOG_NOCOLOR)"
 
 .PHONY: fclean
 fclean: clean
-	@echo -e "$(LOG_CLEAR)$(LOG_BLUE)fclean gnl$(LOG_NOCOLOR)"
-	@make fclean -C $(GNL_PATH)
 	@echo -e "$(LOG_CLEAR)$(LOG_BLUE)fclean libft$(LOG_NOCOLOR)"
 	@make fclean -C $(LIBFT_PATH)
 	@echo -e "$(LOG_CLEAR)$(LOG_BLUE)fclean $(NAME)$(LOG_NOCOLOR)"

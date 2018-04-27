@@ -90,8 +90,9 @@ typedef struct					s_paths
 
 typedef struct					s_ways
 {
+	t_room			**sh_path;
 	int				*way;
-	struct s_way	*next;
+	struct s_ways	*next;
 }								t_ways;
 
 typedef struct					s_pile
@@ -113,10 +114,14 @@ int								ft_parse(char *line, t_game *game);
 int								ft_create_bounds(t_game *game, char *line);
 int								ft_create_room(t_game *game, char *line);
 int								ft_size_path(int *path);
-void							ft_comptabilities(t_game *game, t_ways **start, int n);
+void							ft_compatibilities(t_game *game, t_ways **start, int n);
 int								ft_display_lst(t_room *room);
 int								ft_is_start(char *line);
+void							ft_give_path_cost(t_game *game, int **set, int n, int ants);
 int								ft_is_end(char *line);
+t_ways							*ft_short_path(t_game *game);
+int								ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways);
+void							ft_print_set(int **set, int n);
 int								ft_is_com(char *line);
 int								ft_is_tube(char *line);
 int								ft_is_room(char *line);

@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:57:20 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 09:34:28 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 10:24:38 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	int	ft_load_room(t_room *room, char *line, int room_id)
 			nb_coord++;
 		}
 		else
-			return (ft_error("room_add"));
+			return (-2);
 	/*	{
 			ft_putendl("Error: can't add room");
 			return (-1);

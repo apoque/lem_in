@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 18:12:36 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:58:40 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void		ft_min_path(t_game *game)
 
 	nb_start = 0;
 	nb_end = 0;
-	game->nb_ants = 100;
 	link = game->room_start->next_map;
 	while (link != 0)
 	{
@@ -38,7 +37,7 @@ static void		ft_min_path(t_game *game)
 	printf("nb fourmi = %i, nb_start = %i, nb_end = %i, MIN = %i\n", game->nb_ants, nb_start, nb_end, game->n);
 }
 
-static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
+static int		ft_add_link(t_pile *current, t_link *link, int k)
 {
 	t_pile *new;
 	int		i;
@@ -80,7 +79,7 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 		c = 0;
 		while (current->path[i] != 0)
 			(current->path[i++] == link->room ? c++ : 1);
-		(c == 0 ? ft_add_link(game, current, link, i) : 0);
+		(c == 0 ? ft_add_link(current, link, i) : 0);
 		link = link->next;
 	}
 	return (1);
@@ -106,6 +105,7 @@ t_ways		*ft_short_path(t_game *game)
 
 	ptr = 0;
 	list_ways = 0;
+	current = 0;
 	current = ft_init_pile(current, game);
 	ft_min_path(game);
 	while (current)

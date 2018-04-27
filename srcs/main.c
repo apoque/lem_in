@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 09:38:29 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:54:58 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(void)
 	char	*line;
 	t_game	game;
 	int		i;
+	t_ways	*list_ways;
 
 	i = 0;
 	ft_bzero(&game, sizeof(t_game));
@@ -40,6 +41,32 @@ int	main(void)
 		ft_display_lines(&game);
 		return (-1);
 	}
+
+	int		k;
+	int		m;
+
+	k = 0;
+	game.n = 2;
+	game.set.set = (int **)malloc(sizeof(int *) * game.n);
+	while (k < game.n)
+	{
+		m = 0;
+		game.set.set[k] = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
+		while (m <= game.nb_rooms)
+		{
+			game.set.set[k][m] = -3;
+			m++;
+		}
+		k++;
+	}
+	game.set.nb_path = 0;
+	game.set.cost = 0;
+	game.set.found = 0;
+
+
+
+
+	list_ways = ft_short_path(&game);
 	return (0);
 }
 
