@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_select_path.c                                        :+:      :+:    :+:   */
+/*   ft_select_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 14:27:28 by srossi           ###   ########.fr       */
+/*   Created: 2018/04/27 17:40:59 by apoque            #+#    #+#             */
+/*   Updated: 2018/04/27 17:43:42 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-#include <stdio.h>
 
 int			ft_size_path(int *path)
 {
@@ -53,9 +51,13 @@ int			ft_check_path(t_game *game, int *path, int ant, int wave)
 	while (i < ant && trafic == 0)
 	{
 		k = 0;
-		while (trafic == 0 && (k + wave - game->ants[i].wave) < ft_size_path(game->ants[i].path) && (path[k] != -2 && game->ants[i].path[k + wave - game->ants[i].wave] != -2))
+		while (trafic == 0 &&
+				(k + wave - game->ants[i].wave) <
+				ft_size_path(game->ants[i].path) && (path[k] != -2 &&
+					game->ants[i].path[k + wave - game->ants[i].wave] != -2))
 		{
-			if (path[k]  == game->ants[i].path[k + wave - game->ants[i].wave] && path[k] != -1 && path[k] != -2)
+			if (path[k] == game->ants[i].path[k + wave - game->ants[i].wave] &&
+					path[k] != -1 && path[k] != -2)
 			{
 				trafic = 1;
 			}
@@ -63,10 +65,7 @@ int			ft_check_path(t_game *game, int *path, int ant, int wave)
 		}
 		i++;
 	}
-	if (trafic == 0)
-		return (1);
-	else
-		return (0);
+	return ((trafic == 0) ? 1 : 0);
 }
 
 int			ft_is_best_path(t_game *game, int path, int ant)
@@ -78,7 +77,8 @@ int			ft_is_best_path(t_game *game, int path, int ant)
 	i = 0;
 	while (i < path && is_best == 1)
 	{
-		if (ft_size_path(game->set.set[path]) - ft_size_path(game->set.set[i]) >= game->nb_ants - ant)
+		if (ft_size_path(game->set.set[path]) -
+				ft_size_path(game->set.set[i]) >= game->nb_ants - ant)
 			is_best = 0;
 		i++;
 	}
@@ -102,7 +102,8 @@ void		ft_select_path(t_game *game)
 		path = 0;
 		while (path < game->set.nb_path && ant < game->nb_ants)
 		{
-			if (ft_check_path(game, game->set.set[path], ant, wave) == 1 && ft_is_best_path(game, path, ant) == 1)
+			if (ft_check_path(game, game->set.set[path], ant, wave) == 1 &&
+					ft_is_best_path(game, path, ant) == 1)
 			{
 				ft_give_path(game, path, ant, wave);
 				ant++;

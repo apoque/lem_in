@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_give_path_cost.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 16:59:17 by apoque           ###   ########.fr       */
+/*   Created: 2018/04/27 17:37:21 by apoque            #+#    #+#             */
+/*   Updated: 2018/04/27 17:50:28 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-#include <stdio.h>
-
-int			**ft_ordonate_set(int **set, int n)
+int				**ft_ordonate_set(int **set, int n)
 {
 	int	i;
 	int	j;
@@ -58,27 +56,11 @@ void			ft_change_set(t_game *game, int **set, int n, int cost)
 
 void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 {
-	int	k;
 	int	paths_used;
 	int	cost;
 
-
-	/*int i;
-	i = 0;
-	printf("\nN = %i\n", n);
-	while (set[n -1][i] != -3)
-	{
-		printf("%i-", set[n-1][i]);
-		i++;
-	}
-	printf("\n");*/
-
-
-
 	set = ft_ordonate_set(set, n);
-	cost = 0;
 	paths_used = 0;
-	k = 0;
 	cost = ft_size_path(set[paths_used]) - 2;
 	while (ants > 0)
 	{
@@ -99,5 +81,4 @@ void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 	}
 	if (cost < game->set.cost || game->set.found == 0)
 		ft_change_set(game, set, n, cost);
-	//printf("This set will cost %i\n", cost);
 }

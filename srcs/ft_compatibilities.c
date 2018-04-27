@@ -3,38 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_compatibilities.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 15:04:58 by srossi           ###   ########.fr       */
+/*   Created: 2018/04/27 17:15:43 by apoque            #+#    #+#             */
+/*   Updated: 2018/04/27 17:28:09 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-#include <stdio.h>
-
-
-void		ft_print_set(int **set, int n)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	printf("SET & n = %i\n", n);
-	while (i < n)
-	{
-		j = 0;
-		while (set[i][j] != -2)
-		{
-			printf("%i-", set[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}
-	printf("\n");
-}
+#define K set[i[0]][i[2]]
 
 int			ft_are_compatible(int **set, int n)
 {
@@ -53,7 +30,7 @@ int			ft_are_compatible(int **set, int n)
 				i[3] = 0;
 				while (set[i[1]][i[3]] != -2 && i[4] == 0)
 				{
-					if (set[i[0]][i[2]] == set[i[1]][i[3]] && set[i[0]][i[2]] >= 0)
+					if (K == set[i[1]][i[3]] && K >= 0)
 						i[4] = 1;
 					i[3]++;
 				}
@@ -61,73 +38,52 @@ int			ft_are_compatible(int **set, int n)
 			}
 		}
 	}
-	return ((i[4] == 0) ? 1 : 0 );
+	return ((i[4] == 0) ? 1 : 0);
 }
 
-void		ft_recursive(t_game *game, int ***sett, int *ii, t_ways **way_bi, int *nn)
+void		ft_recursive(t_game *game, int **set, int *m, t_ways *way_bis)
 {
-	t_ways	*way_bis;
-	int		i;
-	int		n;
-	int		**set;
 	int		k;
 
-	way_bis = *way_bi;
-	i = *ii;
-	n = *nn;
-	set = *sett;
-	k = i;
+	k = m[0];
 	while (way_bis != NULL)
 	{
-		set[i] = way_bis->way;
-		if (ft_are_compatible(set, i + 1) == 1)
+		set[m[0]] = way_bis->way;
+		if (ft_are_compatible(set, m[0] + 1) == 1)
 		{
-			if (++i == n)
-			{
-				//printf("X = %i\n", n);
-				//ft_print_set(set, n);
-				ft_give_path_cost(game, set, n, game->nb_ants);
-				//printf("YO\n");
-			}
+			if (++m[0] == m[1])
+				ft_give_path_cost(game, set, m[1], game->nb_ants);
 			else
-				ft_recursive(game, &set, &i, &(way_bis->next), &n);
+				ft_recursive(game, set, m, (way_bis->next));
 		}
-		if (k != i)
-			i--;
+		if (k != m[0])
+			m[0]--;
 		way_bis = way_bis->next;
 	}
 }
 
-void		ft_compatibilities(t_game *game, t_ways **start, int n) //ft a appeler a chaque fois qu on trouve un nouveau chemin
+void		ft_compatibilities(t_game *game, t_ways **start, int n)
 {
 	t_ways	*way;
 	t_ways	*way_bis;
 	int		**set;
 	int		i;
+	int		m[2];
 
 	way = *start;
 	set = (int **)malloc(sizeof(int *) * n);
-	//ft_bzero(&set, sizeof(int *) * n);
-
-	//while (way != NULL)
-	//{
-		i = 0;
-		set[i] = way->way;
-		way_bis = way->next;
-		i++;
-		while (n > 1)
-		{
-			ft_recursive(game, &set, &i, &way_bis, &n);
-			n--;
-		}
-		if (n == 1)
-			ft_give_path_cost(game, set, n, game->nb_ants);
-		//printf("n = %i & found = %i\n", n, game->set.found);
-		//if (game->set.found == 0)
-		//	printf("I = %i\n", game->set.set[0][0]);
-		//if (game->set.found != 0)
-		//	ft_print_set(game->set.set, n);
-		//way = way->next;
-	//}
+	i = 0;
+	set[i] = way->way;
+	way_bis = way->next;
+	i++;
+	m[0] = i;
+	m[1] = n;
+	while (m[1] > 1)
+	{
+		ft_recursive(game, set, m, way_bis);
+		m[1]--;
+	}
+	if (m[1] == 1)
+		ft_give_path_cost(game, set, m[1], game->nb_ants);
 	free(set);
 }

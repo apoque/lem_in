@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_res.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 15:08:20 by srossi           ###   ########.fr       */
+/*   Created: 2018/04/27 17:34:20 by apoque            #+#    #+#             */
+/*   Updated: 2018/04/27 17:36:53 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_all_arrived(t_game *game)
 {
 	int	i;
 	int	all_arrived;
-	
+
 	i = 0;
 	all_arrived = 0;
 	while (i < game->nb_ants && all_arrived == 0)
@@ -41,7 +41,8 @@ int			ft_is_last(t_game *game, int ant, int wave)
 	is_last = 1;
 	while (wave >= game->ants[i].wave && is_last == 1 && i < game->nb_ants)
 	{
-		if (game->ants[i].path[game->ants[i].nb_moves + 1] != -1 && game->ants[i].path[game->ants[i].nb_moves + 1] != -3)
+		if (game->ants[i].path[game->ants[i].nb_moves + 1] != -1 &&
+				game->ants[i].path[game->ants[i].nb_moves + 1] != -3)
 			is_last = 0;
 		i++;
 	}
@@ -51,7 +52,7 @@ int			ft_is_last(t_game *game, int ant, int wave)
 		return (0);
 }
 
-char		*ft_get_room_name(t_game *game, int ant, t_room *start)
+char		*ft_name(t_game *game, int ant, t_room *start)
 {
 	int		room_nb;
 	t_room	*room;
@@ -65,8 +66,10 @@ char		*ft_get_room_name(t_game *game, int ant, t_room *start)
 
 void		ft_move_ant(t_game *game, int ant, int wave)
 {
-	printf("L%d-%s", game->ants[ant].nb + 1, ft_get_room_name(game, ant, game->rooms));
-	if (ft_is_last(game, ant, wave) == 0 || (game->ants[ant].wave == 0 && ant + 1 < game->nb_ants && ft_size_path(game->ants[ant].path) == 2))
+	printf("L%d-%s", game->ants[ant].nb + 1, ft_name(game, ant, game->rooms));
+	if (ft_is_last(game, ant, wave) == 0 ||
+			(game->ants[ant].wave == 0 && ant + 1 < game->nb_ants &&
+			ft_size_path(game->ants[ant].path) == 2))
 		putchar(' ');
 	else
 		putchar('\n');
@@ -86,7 +89,8 @@ void		ft_display_res(t_game *game)
 		i = 0;
 		while (i < game->nb_ants)
 		{
-			if (wave >= game->ants[i].wave && game->ants[i].path[game->ants[i].nb_moves] != -2)
+			if (wave >= game->ants[i].wave &&
+					game->ants[i].path[game->ants[i].nb_moves] != -2)
 			{
 				ft_move_ant(game, i, wave);
 			}
