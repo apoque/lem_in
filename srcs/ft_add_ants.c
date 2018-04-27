@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:21:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 16:45:02 by apoque           ###   ########.fr       */
+/*   Updated: 2018/04/27 17:37:34 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int			ft_add_lants(t_game *game)
 	game->ants = (t_ant *)malloc(sizeof(t_ant) * game->nb_ants);
 	while (i < game->nb_ants)
 	{
-		ft_create_ant(game, &(game->ants[i]));
+		if (ft_create_ant(game, &(game->ants[i])) == -1)
+			return (ft_error("noadd_ants"));
 		game->ants[i].nb = i;
 		i++;
 	}
