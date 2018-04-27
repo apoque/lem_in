@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 11:54:25 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:06:57 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			ft_change_set(t_game *game, int **set, int n, int cost)
 	game->set.cost = cost;
 	game->set.found = 1;
 	game->set.nb_path = n;
-	while (i < n)
+	while (i < game->n && i < n)
 	{
 		if (game->set.set[i][0] == -3)
 			free(game->set.set[i]);
@@ -99,7 +99,7 @@ void			ft_give_path_cost(t_game *game, int **set, int n, int ants)
 			cost++;
 		}
 	}
-	if (cost < game->set.cost || game->set.cost == 0)
+	if (cost < game->set.cost || game->set.found == 0)
 		ft_change_set(game, set, n, cost);
-	printf("This set will cost %i\n", cost);
+	//printf("This set will cost %i\n", cost);
 }

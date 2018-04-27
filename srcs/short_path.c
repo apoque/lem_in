@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 11:58:40 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:55:48 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,18 @@ static void		ft_min_path(t_game *game)
 	}
 	game->n = ((game->nb_ants < nb_end) ? game->nb_ants : nb_end);
 	game->n = ((nb_start < game->n) ? nb_start : game->n);
-	printf("nb fourmi = %i, nb_start = %i, nb_end = %i, MIN = %i\n", game->nb_ants, nb_start, nb_end, game->n);
+	//printf("nb fourmi = %i, nb_start = %i, nb_end = %i, MIN = %i\n", game->nb_ants, nb_start, nb_end, game->n);
 }
 
-static int		ft_add_link(t_pile *current, t_link *link, int k)
+static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 {
 	t_pile *new;
 	int		i;
 
 	i = 0;
+	game->limit++;
+	if (game->limit % 1000 == 0)
+		printf("limit = %i\n", game->limit);
 	if (!(new = (t_pile*)malloc(sizeof(t_pile))))
 		return (0);
 	ft_bzero(new, sizeof(t_pile));
@@ -79,7 +82,7 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 		c = 0;
 		while (current->path[i] != 0)
 			(current->path[i++] == link->room ? c++ : 1);
-		(c == 0 ? ft_add_link(current, link, i) : 0);
+		(c == 0 ? ft_add_link(game, current, link, i) : 0);
 		link = link->next;
 	}
 	return (1);
@@ -92,8 +95,8 @@ static t_pile	*ft_init_pile(t_pile *current, t_game *game)
 	ft_bzero(current,sizeof(t_pile));
 	if (!(current->path = (t_room**)malloc(sizeof(t_room*) * 2)))
 		return (0);
-	ft_bzero(current->path, sizeof(t_room*) * 2);
-	current->path[0] = game->room_start;
+		ft_bzero(current->path, sizeof(t_room*) * 2);
+		current->path[0] = game->room_start;
 	return (current);
 }
 
@@ -103,21 +106,21 @@ t_ways		*ft_short_path(t_game *game)
 	t_pile	*current;
 	t_pile	*ptr;
 
-	ptr = 0;
 	list_ways = 0;
 	current = 0;
 	current = ft_init_pile(current, game);
+	ptr = current;
 	ft_min_path(game);
-	while (current)
+	while (current && (game->k <= game->nb_ants || game->set.found == 0))
 	{
 		if (!ft_add_blocks(game, current))
 			ft_new_shortpath(game, current, &list_ways);
-		ptr = current;
+		//ptr = current;
 		current = current->next;
-		free(ptr->path);
-		free(ptr);
+		//free(ptr->path);
+		//free(ptr);
 	}
-	ft_print_set(game->set.set, game->set.nb_path);
+	//ft_print_set(game->set.set, game->set.nb_path);
 	ft_select_path(game);
 	ft_display_res(game);
 	return (list_ways);

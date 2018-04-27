@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:20:53 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 10:42:40 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 16:23:54 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ typedef	struct		s_error
 
 struct s_error tab_errors[] =
 {
-	{(char *)"room_add", -1,(char *)"Error: room was already added."}
+	{(char *)"room_add", -1,(char *)"Error: room was already added."},
+	{(char *)"empty_line", -1,(char *)"Error: an empty line has been found."},
+	{(char *)"room_add", -1,(char *)"Error: room was already added."},
+
 };
 
 #endif

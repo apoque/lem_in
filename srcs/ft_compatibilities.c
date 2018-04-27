@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 11:55:18 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:04:58 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		ft_recursive(t_game *game, int ***sett, int *ii, t_ways **way_bi, int *nn)
 			if (++i == n)
 			{
 				//printf("X = %i\n", n);
-				ft_print_set(set, n);
+				//ft_print_set(set, n);
 				ft_give_path_cost(game, set, n, game->nb_ants);
 				//printf("YO\n");
 			}

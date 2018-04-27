@@ -75,11 +75,13 @@ typedef struct					s_game
 				int				f_start;
 				int				flag;
 				int				f_end;
+				int				k;
 				int				f_section;
 				int				nb_rooms; // nombre total de salle
 				int				nb_ants; // nombre total de fourmi
 				int				nb_paths; // nombre de chemins selectionnes
 				int				n;       //minimum entre nb_ants liaisons de start et end
+				int				limit;
 }								t_game;
 
 typedef struct					s_paths

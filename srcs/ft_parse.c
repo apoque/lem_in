@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 10:50:35 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:59:13 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_parse(char *line, t_game *game)
 			ft_putendl("Nb ants incorrect");
 			return (-1);
 		}
-		ft_add_lants(game);
 		game->f_section = 1;
 	}
 	else if (ft_is_start(line) && (game->flag == 0 || game->flag == 1))

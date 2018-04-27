@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 11:54:58 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:34:29 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int	main(void)
 			return (-1);
 		}
 	}
+	ft_display_lines(&game);
 	if (ft_last_check(&game) == -2)
-	{
-		ft_display_lines(&game);
 		return (-1);
-	}
-
+	//ft_display_lst(game.rooms);
+	ft_putchar('\n');
 	int		k;
 	int		m;
 

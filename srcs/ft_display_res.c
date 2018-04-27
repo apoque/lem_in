@@ -6,7 +6,7 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 12:07:07 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:08:20 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char		*ft_get_room_name(t_game *game, int ant, t_room *start)
 
 void		ft_move_ant(t_game *game, int ant, int wave)
 {
-	printf("L%i-%s", game->ants[ant].nb + 1, ft_get_room_name(game, ant, game->rooms));
+	printf("L%d-%s", game->ants[ant].nb + 1, ft_get_room_name(game, ant, game->rooms));
 	if (ft_is_last(game, ant, wave) == 0 || (game->ants[ant].wave == 0 && ant + 1 < game->nb_ants && ft_size_path(game->ants[ant].path) == 2))
 		putchar(' ');
 	else
@@ -78,19 +78,9 @@ void		ft_display_res(t_game *game)
 	int	wave;
 	int	i;
 
-	t_room *room;
 	wave = 0;
-
 	i = 0;
-	printf("YOOOO\n");
-	room = game->rooms;
-	while (room->next != NULL)
-	{
-		printf("room n*%i = |%s| & nb = %i\n", i, room->name, room->nb_room);
-		room = room->next;
-		i++;
-	}
-
+	ft_putchar('\n');
 	while (ft_all_arrived(game) == 0)
 	{
 		i = 0;
