@@ -6,12 +6,11 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:56:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 09:34:43 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 10:18:42 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
-#include <stdio.h>
+#include "lem_in.h"
 
 static	int	ft_find_link(t_link *link, char *name)
 {
@@ -29,24 +28,8 @@ static	int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 	ptr_cpy = ptr;
 	if (ft_find_link(ptr_cpy->next_map, room1))
 		return (1);
-<<<<<<< HEAD
-/*
-	ft_putstr("1ere salle : ");
-	ft_putendl(ptr_cpy->name);
-	
-*/	link1->room = ptr;
-/*	
-	ft_putendl("Lien 1 cree.");
-
-	
-*/	
-	printf("Le ptr_cpy name vaut : %s\n", ptr_cpy->name);
-	printf("room1 vaut : %s\n", room1);
-	while(ptr_cpy->next && ft_strcmp(ptr_cpy->name, room1) != 0)
-=======
 	link1->room = ptr;
 	while (ptr_cpy->next && ft_strcmp(ptr_cpy->name, room1) != 0)
->>>>>>> parse
 		ptr_cpy = ptr_cpy->next;
 	if (ft_strcmp(ptr_cpy->name, room1) != 0)
 	{
