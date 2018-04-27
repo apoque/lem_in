@@ -6,7 +6,7 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/26 18:42:16 by srossi           ###   ########.fr        #
+#    Updated: 2018/04/27 09:49:19 by gvannest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,13 @@ SRC_NAME = \
 		   ft_add_ants.c \
 		   ft_check.c \
 		   ft_error.c \
-		   ft_add_line.c
+		   ft_add_line.c \
+		   short_path.c \
+		   new_path.c \
+		   ft_give_path_cost.c\
+		   ft_compabilities.c\
+		   ft_display_res.c\
+		   ft_select_path.c\
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
