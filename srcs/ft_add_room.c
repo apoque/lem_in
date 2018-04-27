@@ -5,9 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 16:57:20 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 12:14:27 by gvannest         ###   ########.fr       */
-/*   Updated: 2018/04/27 10:35:26 by srossi           ###   ########.fr       */
+/*   Created: 2018/04/27 17:24:47 by srossi            #+#    #+#             */
+/*   Updated: 2018/04/27 17:34:29 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +41,12 @@ static	int	ft_load_room(t_room *room, char *line, int room_id)
 		if (line[i] == ' ' && nb_coord < 2 && (l = ft_atoi(&line[i])) >= 0 &&
 				l < INT_MAX)
 		{
-			if (nb_coord == 0)
-				room->y = l;
-			else
-				room->x = l;
+			((nb_coord == 0) ? room->y = l : 0);
+			((nb_coord != 0) ? room->x = l : 0);
 			nb_coord++;
 		}
 		else
-			return (-2);
-	/*	{
-			ft_putendl("Error: can't add room");
-			return (-1);
-		}*/
+			return (ft_error("room_load"));
 		i--;
 	}
 	room->name = ft_strnew(i + 1);

@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:34:49 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 10:51:23 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:26:27 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	ft_is_tube(char *line)
 	int i;
 	int nb_minus;
 
-//	ft_putendl("TUBE");
 	i = 0;
 	nb_minus = 0;
 	while (line[i])
@@ -56,7 +55,6 @@ int	ft_is_room(char *line)
 {
 	int i;
 
-//	ft_putendl("ROOM !");
 	i = ft_strlen(line) - 1;
 	if (!ft_isdigit(line[i]))
 		return (0);
@@ -64,27 +62,16 @@ int	ft_is_room(char *line)
 		i--;
 	if (i > 0 && line[i] == ' ')
 		i--;
-	else
-	{
-		if (line[i] == '-')
-			ft_putendl("Coord neg");
-		return (0);
-	}
+	else if (line[i] == '-')
+		return (ft_error("coord_error"));
 	while (i > 0 && ft_isdigit(line[i]))
 		i--;
 	if (i > 0 && line[i] == ' ')
 		i--;
-	else
-	{
-		if (line[i] == '-')
-			ft_putendl("Coord neg");
-		return (0);
-	}
+	else if (line[i] == '-')
+		return (ft_error("coord_error"));
 	if (line[0] == 'L')
-	{
-		ft_putendl("Room starts with an 'L'");
-		return (0);
-	}
+		return (ft_error("l_room"));
 	if (i >= 0)
 		return (1);
 	return (0);

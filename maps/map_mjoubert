@@ -1,7 +1,8 @@
 #empty line in link
-5
+10
 ##start
 start 23 3
+
 ##end
 end 16 7
 #commentaire
@@ -14,7 +15,7 @@ long3 10 11
 long4 4 8
 start-short0
 short0-short1
- 
+
 short1-end
 long0-start
 long1-long2
