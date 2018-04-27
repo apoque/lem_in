@@ -6,19 +6,24 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:18:35 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/26 19:18:04 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 11:12:36 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int	ft_error(int type_error)
+int	ft_error(char *reason)
 {
-	if (type_error == 1)
-		ft_putendl("Error #1");
-	else if (type_error == 2)
-		ft_putendl("Error #2");
-	return (-1);
+	t_error *tab_error;
+	int i;
+	
+	i = 0;
+	if (!(tab_error = (t_error*)malloc(sizeof(t_error))))
+		return (-1);
+	while (ft_strcmp(reason, tab_error[i].reason) != 0)
+		i++;
+	ft_putendl(tab_error[i].str_print);
+	return (tab_error[i].type_error);
 }
 
 int	ft_last_check(t_game *game)

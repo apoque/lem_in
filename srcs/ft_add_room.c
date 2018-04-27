@@ -6,11 +6,11 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:57:20 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 09:34:28 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 10:35:26 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static	int	ft_find_room(t_room *lst_room, t_room *new_room)
 {
