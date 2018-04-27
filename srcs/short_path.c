@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 16:55:25 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:07:05 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void		ft_min_path(t_game *game)
 	}
 	game->n = ((game->nb_ants < nb_end) ? game->nb_ants : nb_end);
 	game->n = ((nb_start < game->n) ? nb_start : game->n);
+	ft_init_set(game);
 }
 
 static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)

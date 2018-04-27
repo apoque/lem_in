@@ -6,11 +6,24 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:47:49 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 16:59:31 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:07:19 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	ft_init_set(t_game *game)
+{
+	int		k;
+	//int		m;
+
+	k = 0;
+	game->set.set = (int **)malloc(sizeof(int *) * game->n);
+	game->set.nb_path = 0;
+	game->set.cost = 0;
+	game->set.found = 0;
+}
+
 
 int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 {
