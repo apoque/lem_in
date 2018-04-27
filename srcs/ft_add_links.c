@@ -6,12 +6,12 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:56:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 10:23:09 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 12:14:49 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 10:19:26 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
-#include <stdio.h>
+#include "lem_in.h"
 
 static	int	ft_find_link(t_link *link, char *name)
 {
