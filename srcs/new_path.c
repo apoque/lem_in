@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:47:49 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 17:14:07 by apoque           ###   ########.fr       */
+/*   Updated: 2018/04/27 18:31:32 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	ft_init_set(t_game *game)
 {
-	int		k;
-	//int		m;
-
-	k = 0;
-	game->set.set = (int **)malloc(sizeof(int *) * game->n);
+	if(!(game->set.set = (int **)malloc(sizeof(int *) * game->n)))
+		exit (EXIT_FAILURE);
 	game->set.nb_path = 0;
 	game->set.cost = 0;
 	game->set.found = 0;
@@ -35,10 +32,10 @@ int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 		k++;
 	if (!(new_path = ft_memalloc(sizeof(*new_path))) ||
 		!(new_path->sh_path = ft_memalloc(sizeof(t_room*) * (k + 2))))
-		return (-1);
+		exit(EXIT_FAILURE);
 	ft_memcpy(new_path->sh_path, current->path, sizeof(t_room*) * (k + 2));
 	if (!(new_path->way = ft_memalloc(sizeof(int) * (k + 3))))
-		return (-1);
+		exit(EXIT_FAILURE);
 	k = 0;
 	while (new_path->sh_path[k])
 	{

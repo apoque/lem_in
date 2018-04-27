@@ -6,7 +6,7 @@
 /*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:15:43 by apoque            #+#    #+#             */
-/*   Updated: 2018/04/27 17:28:09 by apoque           ###   ########.fr       */
+/*   Updated: 2018/04/27 18:49:55 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void		ft_compatibilities(t_game *game, t_ways **start, int n)
 	int		m[2];
 
 	way = *start;
-	set = (int **)malloc(sizeof(int *) * n);
+	if(!(set = (int **)malloc(sizeof(int *) * n)))
+		exit(EXIT_FAILURE);
 	i = 0;
 	set[i] = way->way;
 	way_bis = way->next;

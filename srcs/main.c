@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 17:36:43 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 18:24:14 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,28 @@ int	main(void)
 	ft_display_lines(&game);
 	if (ft_last_check(&game) == -2)
 		return (-1);
+	list_ways = ft_short_path(&game);
+	ft_select_path(&game);
+	ft_display_res(&game);
+	return (0);
+}
+
+/*int main()
+//{
+	char *line;
+	int i; // nb lignes utiliser structure apres 
+	t_ways	*list_paths;
+	t_game game;
+
+	ft_bzero(&game, sizeof(t_game));
+
+	t_set	set;
+	int		k;
+	int		m;
+
+=======
 	ft_putchar('\n');
+>>>>>>> 823bc038341225f78c5858fd3eeb33bd6fc1b74d
 	k = 0;
 	game.n = 2;
 	game.set.set = (int **)malloc(sizeof(int *) * game.n);

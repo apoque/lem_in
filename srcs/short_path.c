@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 17:07:05 by apoque           ###   ########.fr       */
+/*   Updated: 2018/04/27 18:18:42 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 	if (game->limit % 1000 == 0)
 		printf("limit = %i\n", game->limit);
 	if (!(new = (t_pile*)malloc(sizeof(t_pile))))
-		return (0);
+		exit(EXIT_FAILURE);
 	ft_bzero(new, sizeof(t_pile));
 	if (!(new->path = (t_room**)malloc(sizeof(t_room*) * (k + 2))))
-		return (0);
+		exit(EXIT_FAILURE);
 	ft_bzero(new->path, sizeof(t_room*) * (k + 2));
 	while (current->path[i] != 0)
 	{
@@ -61,7 +61,7 @@ static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 	while (current->next != 0)
 		current = current->next;
 	current->next = new;
-	return (1);
+	return (0);
 }
 
 static int		ft_add_blocks(t_game *game, t_pile *current)
@@ -88,16 +88,16 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 	return (1);
 }
 
-static t_pile	*ft_init_pile(t_pile *current, t_game *game)
+static int		ft_init_pile(t_pile **current, t_game *game)
 {
-	if (!(current = (t_pile*)malloc(sizeof(t_pile))))
-		return (0);
-	ft_bzero(current, sizeof(t_pile));
-	if (!(current->path = (t_room**)malloc(sizeof(t_room*) * 2)))
-		return (0);
-	ft_bzero(current->path, sizeof(t_room*) * 2);
-	current->path[0] = game->room_start;
-	return (current);
+	if (!((*current) = (t_pile*)malloc(sizeof(t_pile))))
+		exit(EXIT_FAILURE);
+	ft_bzero(*current, sizeof(t_pile));
+	if (!((*current)->path = (t_room**)malloc(sizeof(t_room*) * 2)))
+		exit(EXIT_FAILURE);
+	ft_bzero((*current)->path, sizeof(t_room*) * 2);
+	(*current)->path[0] = game->room_start;
+	return (0);
 }
 
 t_ways			*ft_short_path(t_game *game)
@@ -108,7 +108,7 @@ t_ways			*ft_short_path(t_game *game)
 
 	list_ways = 0;
 	current = 0;
-	current = ft_init_pile(current, game);
+	ft_init_pile(&current, game);
 	ptr = current;
 	ft_min_path(game);
 	while (current && (game->k <= game->nb_ants || game->set.found == 0))
@@ -120,7 +120,5 @@ t_ways			*ft_short_path(t_game *game)
 		free(ptr->path);
 		free(ptr);
 	}
-	ft_select_path(game);
-	ft_display_res(game);
 	return (list_ways);
 }
