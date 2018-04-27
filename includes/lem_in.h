@@ -131,6 +131,7 @@ int								ft_add_lants(t_game *game);
 int								ft_add_line(char *line, t_game *game);
 int								ft_last_check(t_game *game);
 int								ft_display_lines(t_game *game);
+void							ft_init_set(t_game *game);
 int								ft_error(char *reason);
 
 #endif

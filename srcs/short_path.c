@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 15:55:48 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 17:07:05 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		ft_min_path(t_game *game)
 {
 	int		nb_start;
 	int		nb_end;
-	t_link *link;
+	t_link	*link;
 
 	nb_start = 0;
 	nb_end = 0;
@@ -34,12 +34,12 @@ static void		ft_min_path(t_game *game)
 	}
 	game->n = ((game->nb_ants < nb_end) ? game->nb_ants : nb_end);
 	game->n = ((nb_start < game->n) ? nb_start : game->n);
-	//printf("nb fourmi = %i, nb_start = %i, nb_end = %i, MIN = %i\n", game->nb_ants, nb_start, nb_end, game->n);
+	ft_init_set(game);
 }
 
 static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 {
-	t_pile *new;
+	t_pile	*new;
 	int		i;
 
 	i = 0;
@@ -66,7 +66,7 @@ static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 
 static int		ft_add_blocks(t_game *game, t_pile *current)
 {
-	t_link *link;
+	t_link	*link;
 	int		i;
 	char	c;
 
@@ -92,17 +92,17 @@ static t_pile	*ft_init_pile(t_pile *current, t_game *game)
 {
 	if (!(current = (t_pile*)malloc(sizeof(t_pile))))
 		return (0);
-	ft_bzero(current,sizeof(t_pile));
+	ft_bzero(current, sizeof(t_pile));
 	if (!(current->path = (t_room**)malloc(sizeof(t_room*) * 2)))
 		return (0);
-		ft_bzero(current->path, sizeof(t_room*) * 2);
-		current->path[0] = game->room_start;
+	ft_bzero(current->path, sizeof(t_room*) * 2);
+	current->path[0] = game->room_start;
 	return (current);
 }
 
-t_ways		*ft_short_path(t_game *game)
+t_ways			*ft_short_path(t_game *game)
 {
-	t_ways *list_ways;
+	t_ways	*list_ways;
 	t_pile	*current;
 	t_pile	*ptr;
 
@@ -115,12 +115,11 @@ t_ways		*ft_short_path(t_game *game)
 	{
 		if (!ft_add_blocks(game, current))
 			ft_new_shortpath(game, current, &list_ways);
-		//ptr = current;
+		ptr = current;
 		current = current->next;
-		//free(ptr->path);
-		//free(ptr);
+		free(ptr->path);
+		free(ptr);
 	}
-	//ft_print_set(game->set.set, game->set.nb_path);
 	ft_select_path(game);
 	ft_display_res(game);
 	return (list_ways);
