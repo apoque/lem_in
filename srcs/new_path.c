@@ -6,11 +6,24 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:47:49 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 15:59:32 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 17:04:50 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	ft_init_set(t_game *game)
+{
+	int		k;
+	//int		m;
+
+	k = 0;
+	game->set.set = (int **)malloc(sizeof(int *) * game->n);
+	game->set.nb_path = 0;
+	game->set.cost = 0;
+	game->set.found = 0;
+}
+
 
 int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 {
@@ -40,9 +53,7 @@ int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 	if (*list_ways != 0)
 		new_path->next = *list_ways;
 	*list_ways = new_path;
-	printf("A\n");
 	ft_compatibilities(game, list_ways, game->n);
-	printf("B\n");
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/27 16:21:19 by srossi           ###   ########.fr        #
+#    Updated: 2018/04/27 16:36:32 by apoque           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILATION
 CC = gcc
-CFLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g3 -Wall -Wextra -Werror
 ADDFLAGS =
 
 # DEFAULT RULE
