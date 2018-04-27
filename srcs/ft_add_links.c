@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 16:56:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 10:18:42 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/27 10:19:26 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	int	ft_add_link(t_room *ptr, char *room1, char *room2, t_link *link1, t_l
 		return (-1);
 	}
 	link2->room = ptr_cpy;
-	link1->next = ptr_cpy->next_map;i
+	link1->next = ptr_cpy->next_map;
 	ptr_cpy->next_map = link1;
 	ptr_cpy = ptr;
 	while (ptr_cpy->next && ft_strcmp(ptr_cpy->name, room2) != 0)
