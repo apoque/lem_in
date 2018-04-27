@@ -6,14 +6,13 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/24 14:51:33 by srossi           ###   ########.fr        #
+#    Updated: 2018/04/26 18:42:16 by srossi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILATION
 CC = gcc
-CFLAGS = -g3
-#-Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 ADDFLAGS =
 
 # DEFAULT RULE
@@ -39,7 +38,12 @@ SRC_NAME = \
 		   main.c \
 		   ft_add_links.c \
 		   ft_add_room.c \
-		   ft_parse.c
+		   ft_parse.c \
+		   ft_display.c \
+		   ft_add_ants.c \
+		   ft_check.c \
+		   ft_error.c \
+		   ft_add_line.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -135,5 +139,5 @@ re: fclean all
 
 norme:
 	norminette $(SRC)
-	norminette ./includes/*.h
+#	norminette ./includes/*.h
 

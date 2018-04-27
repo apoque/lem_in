@@ -6,12 +6,11 @@
 /*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 16:04:38 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/24 18:53:35 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/27 09:33:14 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
 #include <stdio.h>
 
 int			ft_all_arrived(t_game *game)
