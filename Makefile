@@ -6,7 +6,7 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/27 17:09:53 by gvannest         ###   ########.fr        #
+#    Updated: 2018/04/30 12:27:29 by srossi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC_NAME = \
 		   ft_compatibilities.c\
 		   ft_display_res.c\
 		   ft_select_path.c\
+		   ft_free.c\
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
