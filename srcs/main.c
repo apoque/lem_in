@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 18:24:14 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/30 10:41:52 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	main(void)
 	t_game	game;
 	int		i;
 	t_ways	*list_ways;
-	int		k;
-	int		m;
 
 	i = 0;
 	ft_bzero(&game, sizeof(t_game));
@@ -84,4 +82,4 @@ int	main(void)
 	game.set.found = 0;
 	list_ways = ft_short_path(&game);
 	return (0);
-}
+}*/

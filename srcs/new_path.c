@@ -6,11 +6,23 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:47:49 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 18:31:32 by apoque           ###   ########.fr       */
+/*   Updated: 2018/04/30 19:24:09 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void		display(t_ways *list_ways)
+{
+	int i = 0;
+
+	while (list_ways->sh_path[i])
+	{
+		printf("%s ", list_ways->sh_path[i]->name);
+		i++;
+	}
+	putchar('\n');
+}
 
 void	ft_init_set(t_game *game)
 {
@@ -28,6 +40,8 @@ int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 	int		k;
 
 	k = 0;
+	game->nb_chemins_trouves++;
+	//printf("nb de chemins trouves : %d\n", game->nb_chemins_trouves);
 	while (current->path[k])
 		k++;
 	if (!(new_path = ft_memalloc(sizeof(*new_path))) ||
@@ -48,5 +62,10 @@ int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 		new_path->next = *list_ways;
 	*list_ways = new_path;
 	ft_compatibilities(game, list_ways, game->n);
+	//printf("longueur chemin : %d\n", game->k);
+	//printf("give path cost : %d\n", game->set.cost);
+	printf("csv%d;%d;%d", game->nb_chemins_trouves, game->k, game->set.cost);
+	//printf("Premiere salle du chemin trouve : %s\n", (*list_ways)->sh_path[1]->name);
+	//display(*list_ways);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:25:26 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 17:26:02 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/30 12:05:16 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int			ft_create_bounds(t_game *game, char *line)
 		ft_memdel((void *)link1);
 		ft_memdel((void *)link2);
 	}
+	game->nb_liaisons++;
 	ft_strdel(&room1);
 	ft_strdel(&room2);
 	return (0);

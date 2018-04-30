@@ -1,0 +1,12 @@
+n = 10
+
+while (n < 100)
+{
+	echo $n > map1000.$n;
+	echo 'cat map1000' >> map1000.$n
+	if (n < 50)
+		n++;
+	else
+		n = n + 5;
+}
+for n in {5.100};do echo $n > map1000.$n;echo 'cat map1000' >> map1000.$n;done

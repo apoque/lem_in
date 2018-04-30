@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/27 18:18:42 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/30 19:15:30 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 	i = 0;
 	game->limit++;
 	if (game->limit % 1000 == 0)
-		printf("limit = %i\n", game->limit);
+	{
+//		printf("limit = %i\n", game->limit);
+		if (game->limit >= 400000)
+			exit(EXIT_SUCCESS);
+	}
 	if (!(new = (t_pile*)malloc(sizeof(t_pile))))
 		exit(EXIT_FAILURE);
 	ft_bzero(new, sizeof(t_pile));
@@ -111,7 +115,8 @@ t_ways			*ft_short_path(t_game *game)
 	ft_init_pile(&current, game);
 	ptr = current;
 	ft_min_path(game);
-	while (current && (game->k <= game->nb_ants || game->set.found == 0))
+	printf("nb liaisons : %ld\n", game->nb_liaisons);
+	while (current && (game->k <= game->set.cost - 1 || game->set.found == 0))
 	{
 		if (!ft_add_blocks(game, current))
 			ft_new_shortpath(game, current, &list_ways);

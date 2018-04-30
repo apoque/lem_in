@@ -74,6 +74,8 @@ typedef struct					s_game
 				int				**paths; // tableau des n chemins les plus cours
 				int				f_start;
 				int				flag;
+				long			nb_liaisons;
+				int				nb_chemins_trouves;
 				int				f_end;
 				int				k;
 				int				f_section;
