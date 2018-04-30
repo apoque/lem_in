@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:21:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 17:37:34 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/30 15:01:29 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int			ft_add_lants(t_game *game)
 	int i;
 
 	i = 0;
-	game->ants = (t_ant *)malloc(sizeof(t_ant) * game->nb_ants);
+	if (!(game->ants = (t_ant *)malloc(sizeof(t_ant) * game->nb_ants)))
+		return (-1);
 	while (i < game->nb_ants)
 	{
 		if (ft_create_ant(game, &(game->ants[i])) == -1)

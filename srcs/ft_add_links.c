@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:25:26 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/30 12:05:16 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/30 19:35:15 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,20 @@ static	int	ft_add_bounds(t_game *game, char *room1, char *room2, t_link *link1, 
 	return (0);
 }
 
+static	int	ft_free_split(char **tab_split)
+{
+	int i;
+
+	i = 0;
+	while (tab_split[i])
+	{
+		ft_strdel(&tab_split[i]);
+		i++;
+	}
+	free(tab_split);
+	return (0);
+}
+
 int			ft_create_bounds(t_game *game, char *line)
 {
 	char	*room1;
@@ -82,11 +96,9 @@ int			ft_create_bounds(t_game *game, char *line)
 	ft_bzero(link2, sizeof(t_link));
 	if (ft_add_bounds(game, room1, room2, link1, link2) == -1)
 	{
-		ft_memdel((void *)link1);
-		ft_memdel((void *)link2);
+		ft_free_split(tab_split);
+		return (-1);
 	}
-	game->nb_liaisons++;
-	ft_strdel(&room1);
-	ft_strdel(&room2);
+	ft_free_split(tab_split);
 	return (0);
 }

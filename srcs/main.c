@@ -6,11 +6,26 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/30 10:41:52 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/04/30 19:33:03 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+
+/*static int ft_display_ants(t_game *game)
+{
+	t_ant *ptr;
+
+	ptr = game->ants;
+	while (ptr)
+	{
+		ft_putnbr(ptr->nb);
+		ft_putchar('-');
+		ptr = ptr->next;
+	}
+	return (0);
+}*/
 
 int	main(void)
 {
@@ -41,35 +56,16 @@ int	main(void)
 	ft_display_lines(&game);
 	if (ft_last_check(&game) == -2)
 		return (-1);
-	list_ways = ft_short_path(&game);
-	ft_select_path(&game);
-	ft_display_res(&game);
-	return (0);
-}
-
-/*int main()
-//{
-	char *line;
-	int i; // nb lignes utiliser structure apres 
-	t_ways	*list_paths;
-	t_game game;
-
-	ft_bzero(&game, sizeof(t_game));
-
-	t_set	set;
-	int		k;
-	int		m;
-
-=======
 	ft_putchar('\n');
->>>>>>> 823bc038341225f78c5858fd3eeb33bd6fc1b74d
 	k = 0;
 	game.n = 2;
-	game.set.set = (int **)malloc(sizeof(int *) * game.n);
+	if (!(game.set.set = (int **)malloc(sizeof(int *) * game.n)))
+		exit(EXIT_FAILURE);
 	while (k < game.n)
 	{
 		m = 0;
-		game.set.set[k] = (int *)malloc(sizeof(int) * (game.nb_rooms + 1));
+		if (!(game.set.set[k] = (int *)malloc(sizeof(int) * (game.nb_rooms + 1))))
+			exit(EXIT_FAILURE);
 		while (m <= game.nb_rooms)
 		{
 			game.set.set[k][m] = -3;
@@ -77,9 +73,20 @@ int	main(void)
 		}
 		k++;
 	}
+	if (ft_last_check(&game) == -2)
+		return (-1);
 	game.set.nb_path = 0;
 	game.set.cost = 0;
 	game.set.found = 0;
-	list_ways = ft_short_path(&game);
+	if(!(list_ways = ft_short_path(&game)))
+		return (-1);
+	ft_select_path(&game);
+	ft_display_res(&game);
+	ft_free_game(&game, list_ways);
+//	ft_display_ants(&game);
+//	ft_free_lines(game.lines);
+//	ft_free_rooms(game.rooms);
+//	ft_free_ants(game.ants);
+//	ft_free_game(&game);
 	return (0);
-}*/
+}

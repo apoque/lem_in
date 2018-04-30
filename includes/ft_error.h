@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 10:20:53 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/27 17:20:04 by srossi           ###   ########.fr       */
+/*   Updated: 2018/04/30 17:57:21 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef	struct		s_error
 struct s_error tab_errors[] =
 {
 	{(char *)"room_add", -1,(char *)"Error: room was already added."},
-	{(char *)"room_load", -2,(char *)"Error: room couldn't be loaded."},
 	{(char *)"empty_line", -1,(char *)"Error: an empty line has been found."},
 	{(char *)"wrong_ants", -1,(char *)"Error: wrong number of ants."},
 	{(char *)"noadd_ants", -1,(char *)"Error: ant couldn't be created."},
@@ -39,12 +38,16 @@ struct s_error tab_errors[] =
 	{(char *)"link_loop", -1,(char *)"Error: a room cannot be link to itself."},
 	{(char *)"room_unfound", -1,(char *)"Error: room can't be found."},
 	{(char *)"duplicate_link", -1,(char *)"Error: link was created sooner."},
+
 	{(char *)"coord_error", 0,(char *)"Error: wrong coordinates."},
 	{(char *)"l_room", 0,(char *)"Error: room name starts with an 'L'."},
+
+	{(char *)"room_load", -2,(char *)"Error: room couldn't be loaded."},
 	{(char *)"no_start", -2,(char *)"Error: room start does not exist."},
 	{(char *)"no_end", -2,(char *)"Error: the end has no end."},
 	{(char *)"start_unlinked", -2,(char *)"Error: room start has no link."},
 	{(char *)"end_unlinked", -2,(char *)"Error: room end has no end."},
+	{(char *)"se_error", -2,(char *)"Error: expecting start and end rooms."},
 
 };
 
