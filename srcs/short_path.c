@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/04/30 19:15:30 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/05/01 11:45:14 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ static int		ft_add_link(t_game *game, t_pile *current, t_link *link, int k)
 
 	i = 0;
 	game->limit++;
-	if (game->limit % 1000 == 0)
-	{
-//		printf("limit = %i\n", game->limit);
-		if (game->limit >= 400000)
-			exit(EXIT_SUCCESS);
-	}
 	if (!(new = (t_pile*)malloc(sizeof(t_pile))))
 		exit(EXIT_FAILURE);
 	ft_bzero(new, sizeof(t_pile));
@@ -87,6 +81,8 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 		while (current->path[i] != 0)
 			(current->path[i++] == link->room ? c++ : 1);
 		(c == 0 ? ft_add_link(game, current, link, i) : 0);
+		if (game->limit >= 200000 && game->set.found > 0)
+			break ;
 		link = link->next;
 	}
 	return (1);
@@ -115,7 +111,8 @@ t_ways			*ft_short_path(t_game *game)
 	ft_init_pile(&current, game);
 	ptr = current;
 	ft_min_path(game);
-	printf("nb liaisons : %ld\n", game->nb_liaisons);
+	if (game->n == 0)
+		exit(EXIT_SUCCESS);
 	while (current && (game->k <= game->set.cost - 1 || game->set.found == 0))
 	{
 		if (!ft_add_blocks(game, current))
