@@ -74,6 +74,7 @@ typedef struct					s_game
 				int				**paths; // tableau des n chemins les plus cours
 				int				f_start;
 				int				flag;
+				int				f_error;
 				long			nb_liaisons;
 				int				nb_chemins_trouves;
 				int				f_end;
@@ -136,7 +137,7 @@ int								ft_display_lines(t_game *game);
 void							ft_init_set(t_game *game);
 int								ft_error(char *reason);
 int								ft_free_game(t_game *game, t_ways *list_ways);
-int								ft_free_ants(t_ant *aants);
+int								ft_free_ants(t_game *game, t_ant *aants);
 int								ft_free_rooms(t_room *aroom);
 int								ft_free_links(t_link *alink);
 int								ft_free_lines(t_line *aline);
