@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 20:09:01 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/01 20:49:59 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	ft_get_info(t_game *game)
 			return (-2);
 		}
 	}
-	ft_add_lants(game);
-	((game->f_error == 2) ? game->f_error = 3 : 0);
 	if (ft_last_check(game) == -2)
 	{
 		((game->f_error > 0) ? free(line) : 0);
 		return (-2);
 	}
+	ft_add_lants(game);
+	((game->f_error == 2) ? game->f_error = 3 : 0);
 	((game->f_error > 0) ? ft_strdel(&line) : 0);
 	return (0);
 }

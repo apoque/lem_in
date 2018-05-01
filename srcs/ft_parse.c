@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 20:06:51 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/01 20:55:32 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,37 @@ static	int	ft_room_line(t_game *game, char *line)
 	return (0);
 }
 
+int			ft_digit(char *str)
+{
+	int	i;
+	int ok;
+
+	i = 0;
+	ok = 1;
+	while (str[i] != '\0' && ok == 1)
+	{
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '-' || str[i] == '+')
+			;
+		else
+			ok = 0;
+		i++;
+	}
+	if (ok == 1)
+		return (1);
+	else
+		return (0);
+}
+
 static	int	ft_start_end_fz_line(t_game *game, char *line)
 {
-	if (game->f_section == 0)
+	if (ft_digit(line))
 	{
-		if (line[0] == '-')
+		if (line[0] == '-' || game->f_section != 0)
 			return (ft_error("wrong_ants"));
 		game->nb_ants = ft_atoi(line);
 		if (game->nb_ants < 1)
 			return (ft_error("wrong_ants"));
 		game->f_section = 1;
-		//ft_add_lants(game);
-		//((game->f_error == 1) ? game->f_error = 2 : 0);
 	}
 	else if (ft_is_start(line) && (game->flag == 0 || game->flag == 1))
 	{
@@ -81,7 +100,7 @@ int			ft_parse(char *line, t_game *game)
 		return (ft_error("empty_line"));
 	if (ft_is_com(line))
 		;
-	else if (game->f_section == 0 || ft_is_start(line) || ft_is_end(line))
+	else if (ft_digit(line) || ft_is_start(line) || ft_is_end(line))
 	{
 		if (ft_start_end_fz_line(game, line) != 0)
 			return (-1);
@@ -95,7 +114,6 @@ int			ft_parse(char *line, t_game *game)
 	{
 		if (ft_room_line(game, line) != 0)
 			return (-1);
-		((game->f_error == 2) ? game->f_error = 3 : 0);
 	}
 	else if (!(ft_is_com(line)))
 		return (ft_error("line_format"));
