@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:07:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 16:57:37 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 20:09:01 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_get_info(t_game *game)
 	while (i == 0 && get_next_line(0, &line))
 	{
 		i = ft_parse(line, game);
-		printf("LINE = %s\n", line);
 		if (i == 0)
 		{
 			ft_add_line(line, game);
@@ -34,6 +33,8 @@ int	ft_get_info(t_game *game)
 			return (-2);
 		}
 	}
+	ft_add_lants(game);
+	((game->f_error == 2) ? game->f_error = 3 : 0);
 	if (ft_last_check(game) == -2)
 	{
 		((game->f_error > 0) ? free(line) : 0);
@@ -53,8 +54,8 @@ int	main(void)
 	if (ft_get_info(&game) == -2)
 	{
 		ft_free_game(&game, list_ways);
-		while (1)
-			;
+		//while (1)
+	//		;
 		return (-1);
 	}
 	ft_display_lines(&game);
@@ -62,15 +63,15 @@ int	main(void)
 	{
 		game.f_error = 4;
 		ft_free_game(&game, list_ways);
-		while (1)
-			;
+		//while (1)
+		//	;
 		return(-1);
 	}
 	game.f_error = 5;
 	ft_select_path(&game);
 	ft_display_res(&game);
 	ft_free_game(&game, list_ways);
-	while (1)
-		;
+	//while (1)
+	//	;
 	return (0);
 }

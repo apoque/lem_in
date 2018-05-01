@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 16:20:16 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 20:06:51 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static	int	ft_start_end_fz_line(t_game *game, char *line)
 		if (game->nb_ants < 1)
 			return (ft_error("wrong_ants"));
 		game->f_section = 1;
-		ft_add_lants(game);
-		((game->f_error == 1) ? game->f_error = 2 : 0);
+		//ft_add_lants(game);
+		//((game->f_error == 1) ? game->f_error = 2 : 0);
 	}
 	else if (ft_is_start(line) && (game->flag == 0 || game->flag == 1))
 	{

@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:21:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 16:22:55 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 19:59:57 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static	int	ft_create_ant(t_game *game, t_ant *ant)
 	}
 	ant->nb_moves = 0;
 	ant->wave = 0;
-//	ant->next = game->ants;
 	return (0);
 }
 

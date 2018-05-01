@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 10:59:57 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 16:55:28 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 20:09:49 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_free_ants(t_game *game, t_ant *ant)
 		free(ant[i].path);
 		i++;
 	}
-	free(ant);
+	free(game->ants);
 	return (0);
 }
 
@@ -91,8 +91,8 @@ int	ft_free_lines(t_line *aline)
 	{
 		line2 = line1;
 		line1 = line1->next;
-		ft_putstr("line : ");
-		ft_putendl(line2->str);
+		//ft_putstr("line : ");
+		//ft_putendl(line2->str);
 		ft_strdel(&line2->str);
 		free(line2);
 	}
@@ -101,30 +101,30 @@ int	ft_free_lines(t_line *aline)
 
 int	ft_free_game(t_game *game, t_ways *list_ways)
 {
-	printf("f_error = %d\n", game->f_error);
+	//printf("f_error = %d\n", game->f_error);
 	if (game->f_error > 0)
 	{
-		printf("1\n");
+		//printf("1\n");
 		ft_free_lines(game->lines);
 	}
 	if (game->f_error > 1)
 	{
-		printf("2\n");
-		ft_free_ants(game, game->ants);
+		//printf("2\n");
+		ft_free_rooms(game->rooms);
 	}
 	if (game->f_error > 2)
 	{
-		printf("3\n");
-		ft_free_rooms(game->rooms);
+		//printf("3\n");
+		ft_free_ants(game, game->ants);
 	}
 	if (game->f_error > 3)
 	{
-		printf("4\n");
+		//printf("4\n");
 		free(game->set.set);
 	}
 	if (game->f_error > 4)
 	{
-		printf("5\n");
+		//printf("5\n");
 		ft_free_listways(list_ways);
 	}
 	return (0);

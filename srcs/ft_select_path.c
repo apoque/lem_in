@@ -6,7 +6,7 @@
 /*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:40:59 by apoque            #+#    #+#             */
-/*   Updated: 2018/04/27 17:43:42 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/01 19:59:49 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void		ft_select_path(t_game *game)
 
 	wave = 0;
 	ant = 0;
-	ft_add_lants(game);
 	while (ant < game->nb_ants)
 	{
 		path = 0;

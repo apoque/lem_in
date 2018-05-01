@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:25:26 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 16:50:42 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 19:07:48 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static	int	ft_add_link(t_room *ptr, char **rooms[2], t_link *link1,
 	ptr_cpy = ptr;
 	if (ft_find_link(ptr_cpy->next_map, room1))
 	{
-		ft_putendl("LIEN DEJA EXISTANT");
+		//ft_putendl("LIEN DEJA EXISTANT");
 		return (-1);
 	}
 	link1->room = ptr;
@@ -72,7 +72,7 @@ static	int	ft_add_bounds(t_game *game, char **rooms[2], t_link *link1,
 		return (ft_error("room_unfound"));
 	if (ft_strcmp(ptr->name, room1) == 0)
 	{
-		ft_putendl("ROOM1 trouvee");
+		//ft_putendl("ROOM1 trouvee");
 		tmp = *rooms[0];
 		*rooms[0] = *rooms[1];
 		*rooms[1] = tmp;
@@ -80,7 +80,7 @@ static	int	ft_add_bounds(t_game *game, char **rooms[2], t_link *link1,
 	}
 	else if (ft_strcmp(ptr->name, room2) == 0)
 	{
-		ft_putendl("ROOM2 trouvee");
+		//ft_putendl("ROOM2 trouvee");
 		return (ft_add_link(ptr, rooms, link1, link2));
 	}
 	return (0);
@@ -122,7 +122,7 @@ int			ft_create_bounds(t_game *game, char *line)
 	ft_bzero(link2, sizeof(t_link));
 	if (ft_add_bounds(game, rooms, link1, link2) == -1)
 	{
-		ft_putendl("BOUCLE ERREUR DE LIEN");
+		//ft_putendl("BOUCLE ERREUR DE LIEN");
 		ft_free_split(tab_split);
 		free(link1);
 		free(link2);
