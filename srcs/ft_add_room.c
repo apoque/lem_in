@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:24:47 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 20:54:57 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/01 21:11:46 by apoque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static	int	ft_load_room(t_room *room, char *line, int room_id)
 			nb_coord++;
 		}
 		else
+		{
+			free(room);
 			return (ft_error("room_load"));
+		}
 		i--;
 	}
 	room->name = ft_strnew(i + 1);
@@ -72,7 +75,7 @@ int			ft_create_room(t_game *game, char *line)
 	((game->f_error == 1) ? game->f_error = 2 : 0);
 	ft_bzero(room, sizeof(t_room));
 	game->nb_rooms++;
-	if (ft_load_room(room, line, game->nb_rooms) == -1)
+	if (ft_load_room(room, line, game->nb_rooms) < 0)
 		return (-1);
 	if (ft_add_room(game, room) == 1)
 		ft_memdel((void **)(&room));
