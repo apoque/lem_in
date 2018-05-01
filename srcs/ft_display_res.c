@@ -6,7 +6,7 @@
 /*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:34:20 by apoque            #+#    #+#             */
-/*   Updated: 2018/04/27 17:36:53 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/01 17:23:31 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			ft_is_last(t_game *game, int ant, int wave)
 
 	i = ant + 1;
 	is_last = 1;
-	while (wave >= game->ants[i].wave && is_last == 1 && i < game->nb_ants)
+	while (i < game->nb_ants && wave >= game->ants[i].wave && is_last == 1)
 	{
 		if (game->ants[i].path[game->ants[i].nb_moves + 1] != -1 &&
 				game->ants[i].path[game->ants[i].nb_moves + 1] != -3)
