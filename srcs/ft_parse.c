@@ -6,22 +6,11 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/30 18:20:05 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 16:20:16 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static	int	ft_line_zero(t_game *game, char *line)
-{
-	if (line[0] == '-')
-		return (ft_error("wrong_ants"));
-	game->nb_ants = ft_atoi(line);
-	if (game->nb_ants < 1)
-		return (ft_error("wrong_ants"));
-	game->f_section = 1;
-	return (0);
-}
 
 static	int	ft_room_line(t_game *game, char *line)
 {
@@ -43,9 +32,20 @@ static	int	ft_room_line(t_game *game, char *line)
 	return (0);
 }
 
-static	int	ft_start_end_line(t_game *game, char *line)
+static	int	ft_start_end_fz_line(t_game *game, char *line)
 {
-	if (ft_is_start(line) && (game->flag == 0 || game->flag == 1))
+	if (game->f_section == 0)
+	{
+		if (line[0] == '-')
+			return (ft_error("wrong_ants"));
+		game->nb_ants = ft_atoi(line);
+		if (game->nb_ants < 1)
+			return (ft_error("wrong_ants"));
+		game->f_section = 1;
+		ft_add_lants(game);
+		((game->f_error == 1) ? game->f_error = 2 : 0);
+	}
+	else if (ft_is_start(line) && (game->flag == 0 || game->flag == 1))
 	{
 		game->flag = 1;
 		if (game->f_start > 0)
@@ -79,14 +79,11 @@ int			ft_parse(char *line, t_game *game)
 {
 	if (ft_strlen(line) == 0)
 		return (ft_error("empty_line"));
-	else if (game->f_section == 0)
+	if (ft_is_com(line))
+		;
+	else if (game->f_section == 0 || ft_is_start(line) || ft_is_end(line))
 	{
-		if (ft_line_zero(game, line) != 0)
-			return (-1);
-	}
-	else if (ft_is_start(line) || ft_is_end(line))
-	{
-		if (ft_start_end_line(game, line) != 0)
+		if (ft_start_end_fz_line(game, line) != 0)
 			return (-1);
 	}
 	else if (ft_is_tube(line))
@@ -98,6 +95,7 @@ int			ft_parse(char *line, t_game *game)
 	{
 		if (ft_room_line(game, line) != 0)
 			return (-1);
+		((game->f_error == 2) ? game->f_error = 3 : 0);
 	}
 	else if (!(ft_is_com(line)))
 		return (ft_error("line_format"));

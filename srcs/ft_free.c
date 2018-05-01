@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 10:59:57 by srossi            #+#    #+#             */
-/*   Updated: 2018/04/30 16:27:28 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/01 16:55:28 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,17 @@ static int	ft_free_listways(t_ways *list_ways)
 	return (0);
 }
 
-int	ft_free_ants(t_ant *aant)
+int	ft_free_ants(t_game *game, t_ant *ant)
 {
-	t_ant *ant1;
-	t_ant *ant2;
+	int	i;
 
-	ant1 = aant;
-	if (aant == 0)
-		return (0);
-	while (ant1)
+	i = 0;
+	while (i < game->nb_ants)
 	{
-		ant2 = ant1;
-		ant1 = ant1->next;
-		//	free(ant2->path);
-		//	ft_memdel((void *)ant2);
-		//	free(ant2);
+		free(ant[i].path);
+		i++;
 	}
+	free(ant);
 	return (0);
 }
 
@@ -96,6 +91,8 @@ int	ft_free_lines(t_line *aline)
 	{
 		line2 = line1;
 		line1 = line1->next;
+		ft_putstr("line : ");
+		ft_putendl(line2->str);
 		ft_strdel(&line2->str);
 		free(line2);
 	}
@@ -104,9 +101,31 @@ int	ft_free_lines(t_line *aline)
 
 int	ft_free_game(t_game *game, t_ways *list_ways)
 {
-	//	ft_free_ants(game->ants);
-	ft_free_lines(game->lines);
-	ft_free_rooms(game->rooms);
-	ft_free_listways(list_ways);
+	printf("f_error = %d\n", game->f_error);
+	if (game->f_error > 0)
+	{
+		printf("1\n");
+		ft_free_lines(game->lines);
+	}
+	if (game->f_error > 1)
+	{
+		printf("2\n");
+		ft_free_ants(game, game->ants);
+	}
+	if (game->f_error > 2)
+	{
+		printf("3\n");
+		ft_free_rooms(game->rooms);
+	}
+	if (game->f_error > 3)
+	{
+		printf("4\n");
+		free(game->set.set);
+	}
+	if (game->f_error > 4)
+	{
+		printf("5\n");
+		ft_free_listways(list_ways);
+	}
 	return (0);
 }
