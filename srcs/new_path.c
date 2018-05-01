@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:47:49 by gvannest          #+#    #+#             */
-/*   Updated: 2018/05/01 11:37:06 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:19:51 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways)
 	if (!(new_path = ft_memalloc(sizeof(*new_path))) ||
 		!(new_path->sh_path = ft_memalloc(sizeof(t_room*) * (k + 2))))
 		exit(EXIT_FAILURE);
-	ft_memcpy(new_path->sh_path, current->path, sizeof(t_room*) * (k + 2));
+	ft_memcpy(new_path->sh_path, current->path, sizeof(t_room*) * (k + 1));
 	if (!(new_path->way = ft_memalloc(sizeof(int) * (k + 3))))
 		exit(EXIT_FAILURE);
 	k = 0;

@@ -6,7 +6,7 @@
 /*   By: gvannest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 09:31:56 by gvannest          #+#    #+#             */
-/*   Updated: 2018/05/01 11:45:14 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:38:40 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int		ft_add_blocks(t_game *game, t_pile *current)
 		while (current->path[i] != 0)
 			(current->path[i++] == link->room ? c++ : 1);
 		(c == 0 ? ft_add_link(game, current, link, i) : 0);
-		if (game->limit >= 200000 && game->set.found > 0)
+		if (game->limit > 200000 && game->set.found > 0)
 			break ;
 		link = link->next;
 	}
@@ -104,23 +104,27 @@ t_ways			*ft_short_path(t_game *game)
 {
 	t_ways	*list_ways;
 	t_pile	*current;
-	t_pile	*ptr;
+	t_pile	*ptr[2];
 
 	list_ways = 0;
 	current = 0;
 	ft_init_pile(&current, game);
-	ptr = current;
+	ptr[0] = current;
 	ft_min_path(game);
-	if (game->n == 0)
-		exit(EXIT_SUCCESS);
-	while (current && (game->k <= game->set.cost - 1 || game->set.found == 0))
+	((game->n == 0) ? exit(EXIT_SUCCESS) : 0);
+	while (current && (game->k <= game->set.cost - 1 || game->set.found == 0)
+			&& game->limit <= 200000)
 	{
 		if (!ft_add_blocks(game, current))
 			ft_new_shortpath(game, current, &list_ways);
-		ptr = current;
 		current = current->next;
-		free(ptr->path);
-		free(ptr);
+	}
+	while (ptr[0])
+	{
+		ptr[1] = ptr[0];
+		free(ptr[1]->path);
+		ptr[0] = ptr[0]->next;
+		free(ptr[1]);
 	}
 	return (list_ways);
 }
