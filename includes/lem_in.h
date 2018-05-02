@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apoque   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2018/04/23 10:50:21 by srossi           ###   ########.fr       */
+/*   Created: 2018/05/02 19:52:39 by srossi            #+#    #+#             */
+/*   Updated: 2018/05/02 19:54:36 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft.h"
@@ -19,34 +19,34 @@
 
 typedef struct					s_ant
 {
-				int				nb; // numero de la fourmi
-				int				*path; // suite des numeros de salle qu elle va parcourir
-				int				nb_moves; // nombre de coup deja joue
-				int				nb_room; // numero de la salle ou elle se trouve
-				int				wave; // numero de la vague de depart
-				struct	s_ant	*next; //fourmi suivante
+	int				nb;
+	int				*path;
+	int				nb_moves;
+	int				nb_room;
+	int				wave;
+	struct s_ant	*next;
 }								t_ant;
 
 typedef struct					s_room
 {
-	char			*name; // nom de la salle
-	int				nb_room; // numero de la salle
-	int				x; //coordonnees de la salle
+	char			*name;
+	int				nb_room;
+	int				x;
 	int				y;
-	int				nb_bounds; //nombre de liaisons d une salle
-	int				*bonded_rooms; // liste des salles adjascentes
-	int				occupied; //0 si libre sinon numero de la fourmi
-	char			visited; //1 :si salle visitee dans algo  du chemin plus court sinon 0
+	int				nb_bounds;
+	int				*bonded_rooms;
+	int				occupied;
+	char			visited;
 	int				nb_steps;
-	struct s_link	*next_map; // tableau de pointeurs sur les salles next
-	struct s_room	*next; // pointeur sur la room suivante
-	struct s_room	*next_short_path; //pointeur sur next salle du chemin le plus court
+	struct s_link	*next_map;
+	struct s_room	*next;
+	struct s_room	*next_short_path;
 }								t_room;
 
 typedef struct					s_link
 {
-	t_room			*room;// pointeur vers la premiere salle de chaque chemin court
-	struct s_link	*next;// pointeur vers chemin le plus court suivant
+	t_room			*room;
+	struct s_link	*next;
 }								t_link;
 
 typedef struct					s_line
@@ -57,40 +57,40 @@ typedef struct					s_line
 
 typedef struct					s_set
 {
-					int			**set;
-					int			nb_path;
-					int			cost;
-					short		found;
+	int			**set;
+	int			nb_path;
+	int			cost;
+	short		found;
 }								t_set;
 
 typedef struct					s_game
 {
-				t_ant			*ants; // liste des fourmis
-				t_room			*rooms;
-				t_room			*room_start; // debut de la liste chainee des salles
-				t_room			*room_end; // fin de la liste chainee des salles
-				t_set			set;
-				t_line			*lines; // liste des lines
-				int				**paths; // tableau des n chemins les plus cours
-				int				f_start;
-				int				flag;
-				int				f_error;
-				long			nb_liaisons;
-				int				nb_chemins_trouves;
-				int				f_end;
-				int				k;
-				int				f_section;
-				int				nb_rooms; // nombre total de salle
-				int				nb_ants; // nombre total de fourmi
-				int				nb_paths; // nombre de chemins selectionnes
-				int				n;       //minimum entre nb_ants liaisons de start et end
-				int				limit;
+	t_ant			*ants;
+	t_room			*rooms;
+	t_room			*room_start;
+	t_room			*room_end;
+	t_set			set;
+	t_line			*lines;
+	int				**paths;
+	int				f_start;
+	int				flag;
+	int				f_error;
+	long			nb_liaisons;
+	int				nb_chemins_trouves;
+	int				f_end;
+	int				k;
+	int				f_section;
+	int				nb_rooms;
+	int				nb_ants;
+	int				nb_paths;
+	int				n;
+	int				limit;
 }								t_game;
 
 typedef struct					s_paths
 {
-	t_room			*room;// pointeur vers la premiere salle de chaque chemin court
-	struct s_paths	*next;// pointeur vers chemin le plus court suivant
+	t_room			*room;
+	struct s_paths	*next;
 }								t_paths;
 
 typedef struct					s_ways
@@ -102,8 +102,8 @@ typedef struct					s_ways
 
 typedef struct					s_pile
 {
-	t_room			**path; //constitution du chemin dans ce tableau de pointeurs rooms
-	struct s_pile	*next; // pointeur vers le cehmin suivant
+	t_room			**path;
+	struct s_pile	*next;
 }								t_pile;
 
 typedef struct					s_sets
@@ -119,13 +119,16 @@ int								ft_parse(char *line, t_game *game);
 int								ft_create_bounds(t_game *game, char *line);
 int								ft_create_room(t_game *game, char *line);
 int								ft_size_path(int *path);
-void							ft_compatibilities(t_game *game, t_ways **start, int n);
+void							ft_compatibilities(t_game *game, t_ways **start,
+		int n);
 int								ft_display_lst(t_room *room);
 int								ft_is_start(char *line);
-void							ft_give_path_cost(t_game *game, int **set, int n, int ants);
+void							ft_give_path_cost(t_game *game, int **set,
+		int n, int ants);
 int								ft_is_end(char *line);
 t_ways							*ft_short_path(t_game *game);
-int								ft_new_shortpath(t_game *game, t_pile *current, t_ways **list_ways);
+int								ft_new_shortpath(t_game *game, t_pile *current,
+		t_ways **list_ways);
 void							ft_print_set(int **set, int n);
 int								ft_is_com(char *line);
 int								ft_is_tube(char *line);
@@ -136,10 +139,10 @@ int								ft_last_check(t_game *game);
 int								ft_display_lines(t_game *game);
 void							ft_init_set(t_game *game);
 int								ft_error(char *reason);
-int								ft_free_game(t_game *game, t_ways *list_ways);
 int								ft_free_ants(t_game *game, t_ant *aants);
 int								ft_free_rooms(t_room *aroom);
 int								ft_free_links(t_link *alink);
 int								ft_free_lines(t_line *aline);
+int								ft_free_listways(t_ways *list_ways);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:14:30 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 19:41:22 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/02 19:00:00 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_add_line(char *line, t_game *game)
 	t_line *tmp;
 
 	tmp = game->lines;
-	if (line == NULL || game == NULL || !(new_line = (t_line *)malloc(sizeof(t_line))))
+	if (line == NULL || game == NULL ||
+			!(new_line = ft_memalloc(sizeof(t_line))))
 		return (-1);
-	ft_bzero(new_line, sizeof(t_line));
 	if (game->lines == NULL)
 	{
 		game->lines = new_line;

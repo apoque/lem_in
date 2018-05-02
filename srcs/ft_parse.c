@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:21:48 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 21:12:03 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/02 18:42:03 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int			ft_parse(char *line, t_game *game)
 	}
 	else if (ft_is_room(line) && (game->f_section < 2))
 	{
+		if (game->f_section == 0)
+			return (ft_error("wrong_ants"));
 		if (ft_room_line(game, line) != 0)
 			return (-1);
 	}

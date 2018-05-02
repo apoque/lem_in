@@ -4,11 +4,12 @@
 	echo "\n\033[0;35mBegin of valid map\033[0m\n\n" >> leaks
 	for file in $list_file
 	do
+		echo $file
 		sed -e '1,2d' $file > act
-		../lem-in < act | grep '^L' | ./normal $file
+		../lem_in < act | grep '^L' | ./normal $file
 		if test -z $1
 		then
-			RETVAL=`valgrind --log-fd=1 ../lem-in < valid_map/valid_map01 | grep "definitely lost"`
+			RETVAL=`valgrind --log-fd=1 ../lem_in < valid_map/valid_map01 | grep "definitely lost"`
 			LEAK=`echo $RETVAL | cut -d : -f 2 | awk '{print $1}'`
 			if [ "$LEAK" != "0" ]
 			then
@@ -16,5 +17,5 @@
 			fi
 		fi
 	done
-	../lem-in < ./valid_map/big_map00 | ./normal ./valid_map/big_map00
+	../lem_in < ./valid_map/big_map00 | ./normal ./valid_map/big_map00
 	echo "\n"

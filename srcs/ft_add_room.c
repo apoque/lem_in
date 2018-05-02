@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:24:47 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 21:11:46 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/02 18:48:56 by srossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ static	int	ft_find_room(t_room *lst_room, t_room *new_room)
 	return (0);
 }
 
+static	int	ft_load_coord(t_room *room, int nb_coord, int l)
+{
+	((nb_coord == 0) ? room->y = l : 0);
+	((nb_coord != 0) ? room->x = l : 0);
+	return (0);
+}
+
 static	int	ft_load_room(t_room *room, char *line, int room_id)
 {
 	int			i;
@@ -40,11 +47,7 @@ static	int	ft_load_room(t_room *room, char *line, int room_id)
 			i--;
 		if (line[i] == ' ' && nb_coord < 2 && (l = ft_atoi(&line[i])) >= 0 &&
 				l < INT_MAX)
-		{
-			((nb_coord == 0) ? room->y = l : 0);
-			((nb_coord != 0) ? room->x = l : 0);
-			nb_coord++;
-		}
+			((ft_load_coord(room, nb_coord, l) == 0) ? nb_coord++ : 0);
 		else
 		{
 			free(room);
@@ -60,7 +63,7 @@ static	int	ft_load_room(t_room *room, char *line, int room_id)
 static	int	ft_add_room(t_game *game, t_room *new_room)
 {
 	if (ft_find_room(game->rooms, new_room) == 1)
-		return (1);
+		return (-1);
 	new_room->next = game->rooms;
 	game->rooms = new_room;
 	return (0);
@@ -77,7 +80,10 @@ int			ft_create_room(t_game *game, char *line)
 	game->nb_rooms++;
 	if (ft_load_room(room, line, game->nb_rooms) < 0)
 		return (-1);
-	if (ft_add_room(game, room) == 1)
-		ft_memdel((void **)(&room));
+	if (ft_add_room(game, room) == -1)
+	{
+		ft_strdel(&room->name);
+		free(room);
+	}
 	return (0);
 }

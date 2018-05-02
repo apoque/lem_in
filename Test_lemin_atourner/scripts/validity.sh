@@ -4,9 +4,10 @@
 	echo "\n\033[0;35mBegin of checking validity\033[0m\n\n"
 	for file in $list_file
 	do
+		echo $file
 		rm -rf ant
 		sed -e '1,2d' $file > act
-		../lem-in < act | grep '^L' > ant;
+		../lem_in < act | grep '^L' > ant;
 		./validity $file < $file
 	done
 	rm -rf act

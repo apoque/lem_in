@@ -6,7 +6,7 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/04/30 12:27:29 by srossi           ###   ########.fr        #
+#    Updated: 2018/05/02 19:52:21 by srossi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,5 +137,5 @@ re: fclean all
 
 norme:
 	norminette $(SRC)
-#	norminette ./includes/*.h
+	norminette ./includes/*.h
 
