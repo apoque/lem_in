@@ -6,7 +6,7 @@
 #    By: srossi <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/05 18:08:37 by srossi            #+#    #+#              #
-#    Updated: 2018/05/02 19:52:21 by srossi           ###   ########.fr        #
+#    Updated: 2018/05/03 10:52:12 by srossi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,6 @@ $(NAME): $(OBJ)
 	@echo -e "--$(LOG_CLEAR)$(LOG_CYAN)$(NAME)$(LOG_NOCOLOR) compiled................. $(LOG_GREEN)✓$(LOG_NOCOLOR)"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-#$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(GNL_PATH).c
 	@echo -e "--$(LOG_CLEAR)$(LOG_MAGENTA)$(NAME)$(LOG_NOCOLOR)........................ $(LOG_YELLOW)$<$(LOG_NOCOLOR)$(LOG_UP)"
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(ADDFLAGS) -c -o $@ $^
 
@@ -138,4 +137,3 @@ re: fclean all
 norme:
 	norminette $(SRC)
 	norminette ./includes/*.h
-
