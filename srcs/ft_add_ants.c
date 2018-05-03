@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 18:21:28 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/01 19:59:57 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/03 09:39:51 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	int	ft_create_ant(t_game *game, t_ant *ant)
 
 	i = 0;
 	if (!(ant->path = (int *)malloc(sizeof(int) * (game->nb_rooms + 1))))
-		return (-1);
+		exit(EXIT_FAILURE);
 	while (i < game->nb_rooms + 1)
 	{
 		ant->path[i] = -3;
@@ -35,7 +35,7 @@ int			ft_add_lants(t_game *game)
 
 	i = 0;
 	if (!(game->ants = (t_ant *)malloc(sizeof(t_ant) * game->nb_ants)))
-		return (-1);
+		exit(EXIT_FAILURE);
 	while (i < game->nb_ants)
 	{
 		if (ft_create_ant(game, &(game->ants[i])) == -1)

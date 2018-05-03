@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:25:26 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/02 19:30:54 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/03 09:40:38 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int			ft_create_bounds(t_game *game, char *line)
 	}
 	if (!(link1 = ft_memalloc(sizeof(t_link))) ||
 			(!(link2 = ft_memalloc(sizeof(t_link)))))
-		return (-1);
+		exit(EXIT_FAILURE);
 	if (ft_add_bounds(game, rooms, link1, link2) == -1)
 	{
 		ft_free_split(tab_split);

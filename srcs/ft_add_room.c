@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:24:47 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/02 18:48:56 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/03 09:41:05 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			ft_create_room(t_game *game, char *line)
 	t_room *room;
 
 	if (!(room = (t_room *)malloc(sizeof(t_room))))
-		return (-1);
+		exit(EXIT_FAILURE);
 	((game->f_error == 1) ? game->f_error = 2 : 0);
 	ft_bzero(room, sizeof(t_room));
 	game->nb_rooms++;

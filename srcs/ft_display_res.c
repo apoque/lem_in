@@ -6,12 +6,11 @@
 /*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:34:20 by apoque            #+#    #+#             */
-/*   Updated: 2018/05/03 09:28:26 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/05/03 09:43:20 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
 
 int			ft_all_arrived(t_game *game)
 {
@@ -66,13 +65,13 @@ char		*ft_name(t_game *game, int ant, t_room *start)
 
 void		ft_move_ant(t_game *game, int ant, int wave)
 {
-	printf("L%d-%s", game->ants[ant].nb + 1, ft_name(game, ant, game->rooms));
+	ft_printf("L%d-%s", game->ants[ant].nb + 1, ft_name(game, ant, game->rooms));
 	if (ft_is_last(game, ant, wave) == 0 ||
 			(game->ants[ant].wave == 0 && ant + 1 < game->nb_ants &&
 			ft_sizepath(game->ants[ant].path) == 2))
-		putchar(' ');
+		ft_putchar(' ');
 	else
-		putchar('\n');
+		ft_putchar('\n');
 	game->ants[ant].nb_moves++;
 }
 
