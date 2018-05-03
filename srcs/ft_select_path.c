@@ -6,13 +6,13 @@
 /*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:40:59 by apoque            #+#    #+#             */
-/*   Updated: 2018/05/01 19:59:49 by apoque           ###   ########.fr       */
+/*   Updated: 2018/05/03 09:28:00 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			ft_size_path(int *path)
+int			ft_sizepath(int *path)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ void		ft_give_path(t_game *game, int path, int ant, int wave)
 	int size_path;
 
 	i = 0;
-	size_path = ft_size_path(game->set.set[path]);
+	size_path = ft_sizepath(game->set.set[path]);
 	game->ants[ant].wave = wave;
 	if (size_path == 2)
 		game->ants[ant].wave = 0;
@@ -53,7 +53,7 @@ int			ft_check_path(t_game *game, int *path, int ant, int wave)
 		k = 0;
 		while (trafic == 0 &&
 				(k + wave - game->ants[i].wave) <
-				ft_size_path(game->ants[i].path) && (path[k] != -2 &&
+				ft_sizepath(game->ants[i].path) && (path[k] != -2 &&
 					game->ants[i].path[k + wave - game->ants[i].wave] != -2))
 		{
 			if (path[k] == game->ants[i].path[k + wave - game->ants[i].wave] &&
@@ -77,8 +77,8 @@ int			ft_is_best_path(t_game *game, int path, int ant)
 	i = 0;
 	while (i < path && is_best == 1)
 	{
-		if (ft_size_path(game->set.set[path]) -
-				ft_size_path(game->set.set[i]) >= game->nb_ants - ant)
+		if (ft_sizepath(game->set.set[path]) -
+				ft_sizepath(game->set.set[i]) >= game->nb_ants - ant)
 			is_best = 0;
 		i++;
 	}

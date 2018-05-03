@@ -6,7 +6,7 @@
 /*   By: apoque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:34:20 by apoque            #+#    #+#             */
-/*   Updated: 2018/05/01 17:23:31 by gvannest         ###   ########.fr       */
+/*   Updated: 2018/05/03 09:28:26 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		ft_move_ant(t_game *game, int ant, int wave)
 	printf("L%d-%s", game->ants[ant].nb + 1, ft_name(game, ant, game->rooms));
 	if (ft_is_last(game, ant, wave) == 0 ||
 			(game->ants[ant].wave == 0 && ant + 1 < game->nb_ants &&
-			ft_size_path(game->ants[ant].path) == 2))
+			ft_sizepath(game->ants[ant].path) == 2))
 		putchar(' ');
 	else
 		putchar('\n');

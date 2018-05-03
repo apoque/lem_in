@@ -6,7 +6,7 @@
 /*   By: srossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:52:39 by srossi            #+#    #+#             */
-/*   Updated: 2018/05/02 19:54:36 by srossi           ###   ########.fr       */
+/*   Updated: 2018/05/03 09:28:53 by gvannest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct					s_ant
 	int				nb;
 	int				*path;
 	int				nb_moves;
-	int				nb_room;
 	int				wave;
 	struct s_ant	*next;
 }								t_ant;
@@ -33,14 +32,8 @@ typedef struct					s_room
 	int				nb_room;
 	int				x;
 	int				y;
-	int				nb_bounds;
-	int				*bonded_rooms;
-	int				occupied;
-	char			visited;
-	int				nb_steps;
 	struct s_link	*next_map;
 	struct s_room	*next;
-	struct s_room	*next_short_path;
 }								t_room;
 
 typedef struct					s_link
@@ -71,18 +64,14 @@ typedef struct					s_game
 	t_room			*room_end;
 	t_set			set;
 	t_line			*lines;
-	int				**paths;
 	int				f_start;
 	int				flag;
 	int				f_error;
-	long			nb_liaisons;
-	int				nb_chemins_trouves;
 	int				f_end;
 	int				k;
 	int				f_section;
 	int				nb_rooms;
 	int				nb_ants;
-	int				nb_paths;
 	int				n;
 	int				limit;
 }								t_game;
@@ -106,29 +95,22 @@ typedef struct					s_pile
 	struct s_pile	*next;
 }								t_pile;
 
-typedef struct					s_sets
-{
-	int				**set;
-	char			****names;
-	int				cost;
-}								t_sets;
-
 void							ft_select_path(t_game *game);
 void							ft_display_res(t_game *game);
 int								ft_parse(char *line, t_game *game);
 int								ft_create_bounds(t_game *game, char *line);
 int								ft_create_room(t_game *game, char *line);
-int								ft_size_path(int *path);
+int								ft_sizepath(int *path);
 void							ft_compatibilities(t_game *game, t_ways **start,
-		int n);
+								int n);
 int								ft_display_lst(t_room *room);
 int								ft_is_start(char *line);
 void							ft_give_path_cost(t_game *game, int **set,
-		int n, int ants);
+								int n, int ants);
 int								ft_is_end(char *line);
 t_ways							*ft_short_path(t_game *game);
 int								ft_new_shortpath(t_game *game, t_pile *current,
-		t_ways **list_ways);
+								t_ways **list_ways);
 void							ft_print_set(int **set, int n);
 int								ft_is_com(char *line);
 int								ft_is_tube(char *line);
