@@ -6,9 +6,10 @@
 #    By: gvannest <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 13:22:43 by gvannest          #+#    #+#              #
-#    Updated: 2018/05/01 11:32:11 by gvannest         ###   ########.fr        #
+#    Updated: 2018/05/08 11:09:21 by gvannest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 .PHONY: all, clean, fclean, re
 
@@ -47,12 +48,12 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: $(NAME)
 
-$(NAME): Pending $(OBJ)
+$(NAME): Pending $(OBJ) Makefile
 	@ar rc $@ $(OBJ)
 	@ranlib $@
 
 Pending:
-	@echo "Compiling libft..."
+	@sh script.sh
 
 $(OBJ_PATH)/%.o: %.c | $(OBJ_PATH)
 	@gcc $(FLAGS) $(CPPFLAGS) -o $@ -c $<
